@@ -1,0 +1,274 @@
+.containerBlockOne {
+    width: 4%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.containerDays {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    gap: 10px;
+    width: 96%;
+}
+
+.GPT {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.config {
+    height: 50px;
+    width: 100%;
+    border-radius: 21%;
+    background-color: #343A40;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+}
+
+.configSvg {
+    padding: 13px;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    z-index: 30;
+}
+
+.GPT h1 {
+    margin: 0;
+}
+
+.containerDays::-webkit-scrollbar {
+    width: 0; /* Cambia el ancho de la barra */
+}
+
+.day {
+    user-select: none;
+    cursor: pointer;
+    background-color: #343A40;
+    color: white;
+    width: 100%;
+    border-radius: 60%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.day:hover {
+    background-color: #6C757D;
+}
+
+.containerBlockTwo {
+    width: 95%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.containerArticles {
+    height: 100%;
+    width: 50%;
+    gap: 15px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+}
+
+.containerArticles::-webkit-scrollbar {
+    width: 0;
+}
+
+.article {
+    position: relative;
+    height: auto;
+    width: 100%;
+    background-color: #343A40;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+
+.article:hover {
+    background-color: #6C757D;
+}
+
+.article h1, .article p {
+    margin: 0;
+}
+
+.article h1 {
+    font-size: 22px;
+}
+
+.containerArticle {
+    background-color: #343A40;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    padding: 20px;
+    color: #FFF;
+    font-size: 22px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-direction: row;
+    overflow-wrap: break-word;
+}
+
+.containerArticle::-webkit-scrollbar {
+    width: 3px; /* Cambia el ancho de la barra */
+}
+
+.containerArticle::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+}
+
+.containerArticle h1 {
+    margin: 0;
+}
+
+.containerArticle p {
+    font-size: 18px;
+}
+
+.today, .articleActive {
+    background-color: #6C757D;
+}
+
+.twoDay {
+    background-color: #ADB5BD;
+}
+
+.svg {
+    cursor: no-drop;
+}
+
+.svg rect {
+    fill: #343A40;
+}
+
+.svgActive rect {
+    fill: #000;
+    transition: fill .5s ease;
+}
+
+.svgActive {
+    cursor: pointer;
+}
+
+.svgActive path {
+    transition: fill .5s ease;
+    fill: #13c79b;
+}
+
+.containerInput {
+    z-index: 0;
+    background-color: #343A40;
+    padding: 12px 8px 12px 16px;
+    position: absolute;
+    left: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: left 0.1s linear, z-index 0.2s linear;
+
+}
+
+.containerInputActive {
+    transition: left 0.2s ease, z-index 0.8s ease;
+    z-index: 20;
+    left: 40px;
+}
+
+.input {
+    width: 0px;
+    height: 100%;
+    border: 0;
+    padding: 0px;
+    font-size: 14px;
+    transition: padding 0.1s linear, width 0.1s linear;
+}
+
+.input:focus {
+    outline: none;
+    border: 2px solid #10A37F !important;
+}
+
+.input::placeholder {
+    color: rgba(52, 58, 64, 0.64);
+}
+
+.inputActive {
+    transition: padding 0.2s ease, width 0.2s ease;
+    padding: 6px;
+    width: 200px;
+}
+
+.button {
+    display: none;
+}
+
+.buttonActive {
+    transition: display 0.2s ease;
+    height: 100%;
+    padding: 10px;
+    background-color: #10A37F;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 0;
+    border: 0;
+    color: white;
+}
+
+.buttonActive:hover {
+    background-color: #0B7A5C;
+    cursor: pointer;
+}
+
+.error {
+    border: 0px !important;
+}
+
+.errorActive {
+    border: 2px solid #ff2840;
+}
+
+.notFound {
+    width: 50%;
+    height: 50px;
+    color: white;
+}
+
+.notFound h1 {
+    margin: 8px 0px 0px 0px;
+}
+
+.effectGPT {
+    opacity: 1 !important;
+    transition: opacity 1s ease;
+}
+
