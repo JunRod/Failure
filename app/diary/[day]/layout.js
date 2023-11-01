@@ -2,6 +2,7 @@ import {getArticles} from "@db/index.js";
 import Diary from "@styles/diary.module.css";
 import Articles from "@components/articles.js";
 import "@db"
+import {Suspense} from "react";
 
 async function Layout({children, params}) {
 
@@ -15,20 +16,16 @@ async function Layout({children, params}) {
     * porque este componente dejaria de ser un componente de servidor y pasaria a ser un componente de cliente.
     * */
 
-    return (
-        <>
-            {articles?.length === 0 ? (
-                <div className={Diary.notFound}>
-                    <h1>Oh! No se encontraron artículos.</h1>
-                </div>
-            ) : (
-                <div className={Diary.containerArticles}>
-                    <Articles articles={articles}/>
-                </div>
-            )}
-            <div className={Diary.containerArticle}>{children}</div>
-        </>
-    );
+    return (<>
+        {articles?.length === 0 ? (<div className={Diary.notFound}>
+            <h1>Oh! No se encontraron artículos.</h1>
+        </div>) : (<div className={Diary.containerArticles}>
+            <Articles articles={articles}/>
+        </div>)}
+        <div className={Diary.containerArticle}>
+            {children}
+        </div>
+    </>);
 }
 
 

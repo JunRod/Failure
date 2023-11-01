@@ -11,9 +11,9 @@ function Layout({children}) {
         <section className={Diary.containerBlockOne}>
             <div className={Diary.GPT}>
                 <GPTButton/>
-                <div className={Diary.config}>
+                {/*<div className={Diary.config}>
                     <ConfigButton/>
-                </div>
+                </div>*/}
             </div>
             <div className={Diary.containerDays}>
                 <ContainerDays/>

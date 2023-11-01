@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
 }
 
 .containerDays {
@@ -14,11 +15,12 @@
     overflow-x: hidden;
     gap: 10px;
     width: 96%;
+    height: 90%;
 }
 
 .GPT {
     width: 100%;
-    height: 100%;
+    height: 10%;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -79,6 +81,7 @@
     display: flex;
     flex-direction: row;
     gap: 20px;
+
 }
 
 .containerArticles {
@@ -272,3 +275,134 @@
     transition: opacity 1s ease;
 }
 
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bartender {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.barOff {
+    height: 20%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation-name: toff;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    transform: translateX(0%);
+}
+
+@keyframes toff {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+.bar {
+    height: 20%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation-name: tend;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    transform: translateX(-100%);
+}
+
+@keyframes tend {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.bar:nth-child(3), .barOff:nth-child(3) {
+    animation-delay: 100ms;
+}
+
+.bar:nth-child(4), .barOff:nth-child(4) {
+    animation-delay: 200ms;
+}
+
+.bar:nth-child(5), .barOff:nth-child(5) {
+    animation-delay: 300ms;
+}
+
+.bar:nth-child(6), .barOff:nth-child(6) {
+    animation-delay: 400ms;
+}
+
+
+.transition {
+    position: absolute;
+    padding: 200px;
+    color: white;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+}
+
+.transition h1 {
+    font-size: 50px;
+    margin-bottom: 30px;
+
+}
+
+.transition h2 {
+    font-size: 30px;
+    margin-top: 40px;
+}
+
+.transition h1 {
+    margin: 0;
+}
+
+.transition div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.transition button {
+    border: 0;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    width: 120px;
+}
+
+.transition div button:nth-child(2) {
+    background-color: #10A37F;
+}
+
+.transition div button:nth-child(2):hover {
+    background-color: #0B7A5C;
+}
+
+.transition div button:nth-child(1) {
+    background-color: #000000;
+}
+
+.transition div button:nth-child(1):hover {
+    background-color: #272a2d;
+}

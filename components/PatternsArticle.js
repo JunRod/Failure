@@ -1,14 +1,18 @@
 'use client'
 
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import {setRunGPT} from "@store/diarySlice.js";
 
 function PatternsArticle({chunks}) {
 
     const [text, setText] = useState('')
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
-        const delay = 70
+        dispatch(setRunGPT(null))
+        const delay = 50
         const ArrayToString = async () => {
             for (const chunk of chunks) {
                 await new Promise((resolve) => setTimeout(resolve, delay))
