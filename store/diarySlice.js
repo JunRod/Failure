@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {obtenerNombreMesEnEspanol} from "@lib/utils.js";
 
 const initialState = {
     range: null,
@@ -7,6 +8,11 @@ const initialState = {
     articleActive: null,
     transition: null,
     runGPT: null,
+    onMonth: false,
+    onMonthDayText: null,
+    MonthSelected: obtenerNombreMesEnEspanol(),
+    daySelected: new Date().getDate(),
+    createArticle: false,
 }
 
 export const diarySlice = createSlice({
@@ -31,11 +37,31 @@ export const diarySlice = createSlice({
         setRunGPT: (state, {payload}) => {
             state.runGPT = payload
         },
+        setOnMonth: (state, {payload}) => {
+            state.onMonth = payload
+        },
+        setOnMonthDayText: (state, {payload}) => {
+            state.onMonthDayText = payload
+        },
+        setMonthSelected: (state, {payload}) => {
+            state.MonthSelected = payload
+        },
+        setDaySelected: (state, {payload}) => {
+            state.daySelected = payload
+        },
+        setCreateArticle: (state, {payload}) => {
+            state.createArticle = payload
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
 export const {
+    setCreateArticle,
+    setDaySelected,
+    setMonthSelected,
+    setOnMonthDayText,
+    setOnMonth,
     setRunGPT,
     addRange, /*setKeyComplete, setKeyActive,*/
     setArticleActive,

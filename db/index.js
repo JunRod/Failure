@@ -4,9 +4,7 @@ const uri = "mongodb+srv://junior:junior123@cluster0.msp1exz.mongodb.net/?retryW
 
 export const client = new MongoClient(uri, {
     serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
+        version: ServerApiVersion.v1, strict: true, deprecationErrors: true,
     }
 });
 
@@ -21,11 +19,11 @@ export async function connect() {
 
 connect().catch(console.error)
 
-export async function getArticles(day) {
+export async function getArticles(month, day) {
     try {
         const database = client.db("war-mode-db");
         const collection = database.collection("articles");
-        const result = await collection?.find({day})?.toArray()
+        const result = await collection?.find({day, month})?.toArray()
         return result[0]?.articles ?? []
     } catch (e) {
         console.error(e)
@@ -60,6 +58,48 @@ export async function getArticlesByDay(rangue) {
     } catch (e) {
         console.error(e)
     }
-
-
 }
+
+/*
+export async function setData() {
+    try {
+        const database = client.db("war-mode-db");
+        const collection = database.collection("articles");
+        await collection?.insertMany([{
+            day: 4, articles: [{
+                id: 1,
+                task: 'Autodidacta',
+                titleNote: "Pensamientos",
+                content: "Me dormi ayer a las 10 AM, y comence a estudiar 1 hora despues."
+            }, {
+                id: 2, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
+            }, {
+                id: 3, task: 'Leer', titleNote: "Pensamientos", content: "Lei 1 hora en lugar de dos."
+            }, {
+                id: 4, task: 'Leer', titleNote: "Pensamientos", content: "Complete la tarea de dormir."
+            }, {
+                id: 5, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
+            },]
+        }, {
+            day: 3, articles: [{
+                id: 1,
+                task: 'Leer',
+                titleNote: "Pensamientos",
+                content: "Lei todas las horas."
+            }, {
+                id: 2, task: 'Boxeo', titleNote: "Pensamientos", content: "Entrene bien"
+            }, {
+                id: 3, task: 'Leer', titleNote: "Pensamientos", content: "Lei 1 hora en lugar de dos."
+            }, {
+                id: 4, task: 'Leer', titleNote: "Pensamientos", content: "Complete la tarea de dormir."
+            }, {
+                id: 5, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
+            },]
+        }
+
+        ])
+    } catch (e) {
+        console.error(e)
+    }
+}
+*/

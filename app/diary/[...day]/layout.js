@@ -1,13 +1,16 @@
 import {getArticles} from "@db/index.js";
 import Diary from "@styles/diary.module.css";
-import Articles from "@components/articles.js";
+import GenerateArticles from "@components/generateArticles.js";
 import "@db"
-import {Suspense} from "react";
+import CreateArticle from "@components/createArticle.js";
 
 async function Layout({children, params}) {
 
+    /*Este layout encierra el bloque dos, los artriculos y el artive article.*/
+
     const {day} = params;
-    const articles = await getArticles(Number(day))
+    const articles = await getArticles(day[0], Number(day[1]))
+    /*await setData()*/
 
     /*Me puse a pensar otra manera de obtener el articulo cada vez que hago click en cualquier de ellos.
     * La funcionalidad de ahora: usamos un link donde nos lleva a otra segmento que es el id del articulo
@@ -19,9 +22,15 @@ async function Layout({children, params}) {
     return (<>
         {articles?.length === 0 ? (<div className={Diary.notFound}>
             <h1>Oh! No se encontraron artículos.</h1>
-        </div>) : (<div className={Diary.containerArticles}>
-            <Articles articles={articles}/>
-        </div>)}
+        </div>) : (
+            <div className={Diary.containerArticleAndCreate}>
+                <CreateArticle/>
+                <div className={Diary.containerArticles}>
+                    <GenerateArticles articles={articles}/>
+                </div>
+            </div>
+
+        )}
         <div className={Diary.containerArticle}>
             {children}
         </div>

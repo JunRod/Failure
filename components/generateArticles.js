@@ -1,16 +1,17 @@
 'use client'
 
 import Diary from "@styles/diary.module.css";
-import {setArticleActive} from "@store/diarySlice.js";
+import {setArticleActive, setCreateArticle} from "@store/diarySlice.js";
 import {useDispatch} from "react-redux";
 import {useState} from "react";
 
-function Articles({articles}) {
+function GenerateArticles({articles}) {
 
     const dispatch = useDispatch();
     const [articleActiveCSS, setArticleActiveCSS] = useState(null)
 
     function setArticle(article) {
+        dispatch(setCreateArticle(false));
         dispatch(setArticleActive(article));
         setArticleActiveCSS(article.id)
     }
@@ -28,8 +29,9 @@ function Articles({articles}) {
                         {task}
                         <svg
                             onClick={() => console.log('delete article')}
-                            xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-trash-filled"
-                            width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className={`${Diary.delete} icon icon-tabler icon-tabler-trash-filled`}
+                            width="22" height="22" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
                             fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path
@@ -48,4 +50,4 @@ function Articles({articles}) {
     );
 }
 
-export default Articles;
+export default GenerateArticles;

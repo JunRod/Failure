@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
+    z-index: 200;
 }
 
 .containerDays {
@@ -65,6 +65,7 @@
     border-radius: 60%;
     text-align: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding: 12px 0px;
     font-size: 20px;
@@ -72,6 +73,10 @@
 }
 
 .day:hover {
+    background-color: #6C757D;
+}
+
+.monthActive {
     background-color: #6C757D;
 }
 
@@ -86,7 +91,7 @@
 
 .containerArticles {
     height: 100%;
-    width: 50%;
+    width: 100%;
     gap: 15px;
     overflow-y: scroll;
     display: flex;
@@ -279,6 +284,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 22px;
 }
 
 .bartender {
@@ -405,4 +411,60 @@
 
 .transition div button:nth-child(1):hover {
     background-color: #272a2d;
+}
+
+.month {
+    height: 10%;
+    background-color: #13c79b;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+.delete {
+    display: none;
+}
+
+.article:hover i .delete {
+    display: flex;
+}
+
+.createArticle {
+    width: 100%;
+    height: 30px;
+    color: white;
+    text-align: center;
+    background-color: #343A40;
+    cursor: pointer;
+    transition: height 0.2s ease;
+    position: relative;
+}
+
+.createArticle h1 {
+    position: relative;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.createArticle:hover {
+    background-color: #6C757D;
+    height: 45px;
+    transition: height 0.2s ease;
+}
+
+.containerArticleAndCreate {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 50%
 }

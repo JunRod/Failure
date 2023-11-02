@@ -1,7 +1,9 @@
 import Diary from "@styles/diary.module.css"
-import ContainerDays from "@components/containerDays";
-import ConfigButton from "@components/configButton";
+import GeneratorDays from "@components/generatorDays.js";
+/*import ConfigButton from "@components/configButton";*/
 import GPTButton from "@components/GPTButton";
+import MonthOnHover from "@components/MonthOnHover.js";
+import IsDaysOrMonth from "@components/isDaysOrMonth.js";
 
 // Al final de hacer el front a la ligera, meterle tailwind y sass.
 function Layout({children}) {
@@ -15,8 +17,9 @@ function Layout({children}) {
                     <ConfigButton/>
                 </div>*/}
             </div>
+            <MonthOnHover/>
             <div className={Diary.containerDays}>
-                <ContainerDays/>
+                <IsDaysOrMonth/>
             </div>
         </section>
 

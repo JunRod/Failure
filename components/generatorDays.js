@@ -3,18 +3,21 @@
 import {useEffect, useRef, useState} from "react";
 import Diary from "@styles/diary.module.css";
 import {useDispatch, useSelector} from "react-redux";
-import {addRange} from "@store/diarySlice";
+import {addRange, setDaySelected, setOnMonth} from "@store/diarySlice";
 import Link from "next/link";
 import {redirect, usePathname} from "next/navigation";
+import {mesesAbreviadosEnEspanol} from "@lib/utils.js";
 
-function ContainerDays() {
+function GeneratorDays() {
 
     const pathname = usePathname();
-
     const todayRef = useRef(null);
     const [today, setToday] = useState(new Date().getDate())
     const [twoDay, setTwoDay] = useState(null)
     const dispatch = useDispatch();
+    const {onMonth, onMonthDayText, MonthSelected} = useSelector(state => state.diary)
+    const [indexMonthSelected, setIndexMonthSelected] = useState(mesesAbreviadosEnEspanol.indexOf(MonthSelected))
+    const [DayUltimateMonth, setDayUltimateMonth] = useState(new Date(new Date().getFullYear(), indexMonthSelected + 1, 0).getDate())
 
     let clickCount = 0;
     let clickTimer;
@@ -39,7 +42,7 @@ function ContainerDays() {
 
     useEffect(() => {
         if (pathname === "/diary") {
-            redirect(`/diary/${today}`)
+            redirect(`/diary/${MonthSelected}/${today}`)
         }
     }, []);
 
@@ -59,7 +62,7 @@ function ContainerDays() {
         }
     }, [])
 
-    return (Array(31)
+    return (Array(DayUltimateMonth)
         .fill(0)
         .map((_, i) => {
 
@@ -72,17 +75,19 @@ function ContainerDays() {
 
             return (
                 <Link
+                    onClick={() => dispatch(setDaySelected(i + 1))}
+                    onMouseOver={() => (onMonth && onMonthDayText) && dispatch(setOnMonth(true))}
                     scroll={false}
                     prefetch={true}
                     key={i}
                     className={`${Diary.day} ${isToday ? Diary.today : ''} ${isWithinRange ? Diary.today : ''} ${isTwoDay ? Diary.twoDay : ''}`}
                     ref={isToday ? todayRef : null}
                     onMouseDown={() => handleMouseDown(i)}
-                    href={`/diary/${i + 1}`}
+                    href={`/diary/${MonthSelected}/${i + 1}`}
                 >
                     {i + 1}
                 </Link>)
         }));
 }
 
-export default ContainerDays;
+export default GeneratorDays;
