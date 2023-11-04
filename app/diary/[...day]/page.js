@@ -1,6 +1,6 @@
-import HOCGetAllDataPatternsArticle from "@components/HOC-GetAllData-PatternsArticle.js";
 import {Suspense} from "react";
 import HocTemplateArticleActive from "@components/HOC-Template-ArticleActive.js";
+import GetDataForIA from "@components/getDataForIA.js";
 
 async function Page({params, searchParams}) {
 
@@ -10,14 +10,13 @@ async function Page({params, searchParams}) {
     * que se ejecute el gpt si no tiene la key, pero si se ejecuta el gpt sin tener un rango, entonces si
     * tendria que hacer un middleware para que verifique si tiene un rango, si no tiene un rango, entonces
     * si podria ejecutar el gpt.
-    *
     * */
 
     if (!searchParams?.today) return <HocTemplateArticleActive/>
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <HOCGetAllDataPatternsArticle searchParams={searchParams}/>
+            <GetDataForIA searchParams={searchParams}/>
         </Suspense>
     )
 

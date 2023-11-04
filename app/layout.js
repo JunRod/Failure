@@ -12,6 +12,7 @@ export const metadata = {
 }
 
 export default function RootLayout({children}) {
+    
     return (
         <Providers>
             <html lang="en">

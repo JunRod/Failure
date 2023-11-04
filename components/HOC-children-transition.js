@@ -9,8 +9,10 @@ function HocChildrenTransition({children}) {
 
     return (
         <body>
-        {children}
-        {transition ? (<Transition/>) : null}
+        <div>
+            {children}
+            {transition ? (<Transition/>) : null}
+        </div>
         </body>
     );
 }

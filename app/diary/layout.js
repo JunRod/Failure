@@ -1,6 +1,4 @@
 import Diary from "@styles/diary.module.css"
-import GeneratorDays from "@components/generatorDays.js";
-/*import ConfigButton from "@components/configButton";*/
 import GPTButton from "@components/GPTButton";
 import MonthOnHover from "@components/MonthOnHover.js";
 import IsDaysOrMonth from "@components/isDaysOrMonth.js";
@@ -13,9 +11,6 @@ function Layout({children}) {
         <section className={Diary.containerBlockOne}>
             <div className={Diary.GPT}>
                 <GPTButton/>
-                {/*<div className={Diary.config}>
-                    <ConfigButton/>
-                </div>*/}
             </div>
             <MonthOnHover/>
             <div className={Diary.containerDays}>

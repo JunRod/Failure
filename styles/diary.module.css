@@ -134,17 +134,18 @@
     height: 100%;
     width: 50%;
     display: flex;
+    flex-direction: column;
     padding: 20px;
     color: #FFF;
     font-size: 22px;
     overflow-y: scroll;
     overflow-x: hidden;
-    flex-direction: row;
     overflow-wrap: break-word;
 }
 
+
 .containerArticle::-webkit-scrollbar {
-    width: 3px; /* Cambia el ancho de la barra */
+    width: 0px; /* Cambia el ancho de la barra */
 }
 
 .containerArticle::-webkit-scrollbar-track {
@@ -425,6 +426,7 @@
     text-transform: uppercase;
     border-radius: 20%;
     cursor: pointer;
+    width: 100%;
 }
 
 .delete {
@@ -438,6 +440,8 @@
 .createArticle {
     width: 100%;
     height: 30px;
+    display: flex;
+    justify-content: center;
     color: white;
     text-align: center;
     background-color: #343A40;
@@ -467,4 +471,45 @@
     gap: 10px;
     height: 100%;
     width: 50%
+}
+
+.containerTemplateCreateArticle {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.containerArticle input {
+    color: white;
+    border: 0;
+    background-color: #343A40;
+    width: 100%;
+    height: 24px;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.containerArticle input:focus {
+    outline: none;
+}
+
+.containerArticle textarea {
+    color: white;
+    border: 0;
+    background-color: #343A40;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    resize: none;
+    padding: 0;
+}
+
+.containerArticle textarea::-webkit-scrollbar {
+    width: 0;
+}
+
+.containerArticle textarea:focus {
+    outline: none;
 }

@@ -1,9 +1,9 @@
-import PatternsArticle from "@components/PatternsArticle.js";
+import IATextEffect from "@components/IATextEffect.js";
 import {getArticlesByDay} from "@db/index.js";
 import {OpenAIChat} from "@ia/index.js";
 import {collectionsToString} from "@lib/utils.js";
 
-async function HocGetAllDataPatternsArticle({searchParams}) {
+async function GetDataForIA({searchParams}) {
 
     /*Convierte los value de los parametros en numeros.*/
     const numericObject = Object.fromEntries(
@@ -24,7 +24,7 @@ async function HocGetAllDataPatternsArticle({searchParams}) {
         chunks.push(chunk);
     }
 
-    return <PatternsArticle chunks={chunks}/>
+    return <IATextEffect chunks={chunks}/>
 }
 
-export default HocGetAllDataPatternsArticle;
+export default GetDataForIA;

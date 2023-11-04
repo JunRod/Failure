@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useDispatch} from "react-redux";
 import {setRunGPT} from "@store/diarySlice.js";
 
-function PatternsArticle({chunks}) {
+function IATextEffect({chunks}) {
 
     const [text, setText] = useState('')
     const dispatch = useDispatch()
@@ -28,4 +28,4 @@ function PatternsArticle({chunks}) {
 
 }
 
-export default PatternsArticle;
+export default IATextEffect;

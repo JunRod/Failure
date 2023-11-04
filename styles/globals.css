@@ -7,15 +7,20 @@ html {
 }
 
 body {
-    overflow-x: hidden;
     background-color: #212529;
     margin: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
-    overflow-y: hidden;
-    height: 80vh;
+    overflow: hidden;
+}
+
+body div {
     gap: 20px;
+    display: flex;
+    flex-direction: row;
+    height: 600px;
+    width: 1280px;
 }
 

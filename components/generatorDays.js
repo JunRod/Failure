@@ -15,7 +15,7 @@ function GeneratorDays() {
     const [today, setToday] = useState(new Date().getDate())
     const [twoDay, setTwoDay] = useState(null)
     const dispatch = useDispatch();
-    const {onMonth, onMonthDayText, MonthSelected} = useSelector(state => state.diary)
+    const {onMonth, onMonthDayText, MonthSelected, daySelected} = useSelector(state => state.diary)
     const [indexMonthSelected, setIndexMonthSelected] = useState(mesesAbreviadosEnEspanol.indexOf(MonthSelected))
     const [DayUltimateMonth, setDayUltimateMonth] = useState(new Date(new Date().getFullYear(), indexMonthSelected + 1, 0).getDate())
 
@@ -66,8 +66,8 @@ function GeneratorDays() {
         .fill(0)
         .map((_, i) => {
 
-            //Saber el div que contiene el dia de hoy
-            const isToday = today === i + 1
+            //Saber el div que esta seleccionado
+            const isDaySelected = daySelected === i + 1
             //Le pone un gris mas claro para diferenciarlo del dia seleccionado con un click
             const isTwoDay = twoDay === i + 1
 
@@ -80,8 +80,8 @@ function GeneratorDays() {
                     scroll={false}
                     prefetch={true}
                     key={i}
-                    className={`${Diary.day} ${isToday ? Diary.today : ''} ${isWithinRange ? Diary.today : ''} ${isTwoDay ? Diary.twoDay : ''}`}
-                    ref={isToday ? todayRef : null}
+                    className={`${Diary.day} ${isDaySelected ? Diary.today : ''} ${isWithinRange ? Diary.today : ''} ${isTwoDay ? Diary.twoDay : ''}`}
+                    ref={isDaySelected ? todayRef : null}
                     onMouseDown={() => handleMouseDown(i)}
                     href={`/diary/${MonthSelected}/${i + 1}`}
                 >

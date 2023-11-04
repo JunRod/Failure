@@ -3,8 +3,6 @@ import {obtenerNombreMesEnEspanol} from "@lib/utils.js";
 
 const initialState = {
     range: null,
-    /*keyComplete: false,
-    keyActive: false,*/
     articleActive: null,
     transition: null,
     runGPT: null,
@@ -13,6 +11,8 @@ const initialState = {
     MonthSelected: obtenerNombreMesEnEspanol(),
     daySelected: new Date().getDate(),
     createArticle: false,
+    widthContainerArticleActive: null,
+    articlesState: [],
 }
 
 export const diarySlice = createSlice({
@@ -22,12 +22,6 @@ export const diarySlice = createSlice({
         addRange: (state, {payload}) => {
             state.range = payload
         },
-        /* setKeyComplete: (state, {payload}) => {
-             state.keyComplete = payload
-         },
-         setKeyActive: (state, {payload}) => {
-             state.keyActive = payload
-         },*/
         setArticleActive: (state, {payload}) => {
             state.articleActive = payload
         },
@@ -52,11 +46,15 @@ export const diarySlice = createSlice({
         setCreateArticle: (state, {payload}) => {
             state.createArticle = payload
         },
+        setArticlesState: (state, {payload}) => {
+            state.articlesState = [...state.articlesState, payload]
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
 export const {
+    setArticlesState,
     setCreateArticle,
     setDaySelected,
     setMonthSelected,

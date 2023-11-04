@@ -1,6 +1,5 @@
 'use client'
 
-import {obtenerNombreMesEnEspanol} from "@lib/utils.js";
 import {useEffect, useState} from "react";
 import Diary from "@styles/diary.module.css";
 import {useDispatch, useSelector} from "react-redux";

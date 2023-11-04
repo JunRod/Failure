@@ -24,7 +24,7 @@ export async function getArticles(month, day) {
         const database = client.db("war-mode-db");
         const collection = database.collection("articles");
         const result = await collection?.find({day, month})?.toArray()
-        return result[0]?.articles ?? []
+        return result ?? []
     } catch (e) {
         console.error(e)
     }
@@ -58,6 +58,10 @@ export async function getArticlesByDay(rangue) {
     } catch (e) {
         console.error(e)
     }
+}
+
+export function saveArticle(e) {
+    console.log(e.target)
 }
 
 /*
