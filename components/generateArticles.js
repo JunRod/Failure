@@ -1,38 +1,19 @@
 'use client'
 
 import Diary from "@styles/diary.module.css";
-import {setArticleActive, setArticlesState, setCreateArticle} from "@store/diarySlice.js";
-import {useDispatch, useSelector} from "react-redux";
+import {setArticleActive, setCreateArticle} from "@store/diarySlice.js";
+import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
 
 function GenerateArticles({result}) {
 
     const dispatch = useDispatch();
     const [articleActiveCSS, setArticleActiveCSS] = useState(null)
-    const {articlesState} = useSelector(state => state.diary)
     const {articles} = result[0] ? result[0] : [{articles: []}]
-
-    useEffect(() => {
-
-        function setArticlesStateFunction() {
-            if (articlesState.length === 0) {
-                dispatch(
-                    setArticlesState(result[0])
-                )
-                return null
-            }
-
-            const agree = articlesState?.filter(articleState => articleState._id === result[0]._id)
-            if (agree.length === 0) dispatch(setArticlesState(result[0]))
-        }
-
-        setArticlesStateFunction()
-
-    }, []);
 
     function setArticle(article) {
         dispatch(setCreateArticle(false));
-        dispatch(setArticleActive(article));
+        dispatch(setArticleActive({...article, idContainer: result[0]._id}));
         setArticleActiveCSS(article.id)
     }
 

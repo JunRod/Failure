@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector/*, useDispatch*/} from "react-redux";
 /*import {setKeyActive} from "@store/diarySlice";*/
 import {createUrl} from "@lib/utils.js";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, redirect} from "next/navigation";
 import {setTransition} from "@store/diarySlice.js";
 
 
@@ -15,7 +15,6 @@ function GptButton() {
     const {range, runGPT/*keyComplete*/} = useSelector(state => state.diary);
     const [GPTActive, setGPTActive] = useState(false)
     const pathname = usePathname()
-    const router = useRouter()
 
     async function VerifyEverything() {
         /*Cuando todavia no hay key se abre el icono de config*/
@@ -32,7 +31,7 @@ function GptButton() {
         const isRun = async () => {
             if (runGPT) {
                 const newUrl = createUrl(pathname, {...range})
-                await router.replace(newUrl)
+                redirect(newUrl, 'replace')
             }
         }
         isRun()

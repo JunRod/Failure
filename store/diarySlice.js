@@ -12,7 +12,6 @@ const initialState = {
     daySelected: new Date().getDate(),
     createArticle: false,
     widthContainerArticleActive: null,
-    articlesState: [],
 }
 
 export const diarySlice = createSlice({
@@ -46,15 +45,12 @@ export const diarySlice = createSlice({
         setCreateArticle: (state, {payload}) => {
             state.createArticle = payload
         },
-        setArticlesState: (state, {payload}) => {
-            state.articlesState = [...state.articlesState, payload]
-        },
+
     },
 })
 
 // Action creators are generated for each case reducer function
 export const {
-    setArticlesState,
     setCreateArticle,
     setDaySelected,
     setMonthSelected,

@@ -1,0 +1,31 @@
+import OpenAI from 'openai';
+import {OpenAIStream, StreamingTextResponse} from 'ai';
+import {NextResponse} from "next/server";
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+    baseURL: `https://api.naga.ac/v1`,
+});
+
+export async function POST(req) {
+    try {
+        const {prompt} = await req.json();
+
+        const response = await openai.completions.create({
+            model: 'gpt-3.5-turbo',
+            stream: true,
+            messages: `Quiero dejar mis malos habitos. Encuentra patrones negativos en ${prompt} y muestramelos punto por punto.`
+        });
+
+        const stream = OpenAIStream(response);
+
+        return new StreamingTextResponse(stream);
+    } catch (error) {
+        if (error instanceof OpenAI.APIError) {
+            const {name, status, headers, message} = error;
+            return NextResponse.json({name, status, headers, message}, {status});
+        } else {
+            throw error;
+        }
+    }
+}

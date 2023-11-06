@@ -1,6 +1,6 @@
 import {Suspense} from "react";
-import HocTemplateArticleActive from "@components/HOC-Template-ArticleActive.js";
 import GetDataForIA from "@components/getDataForIA.js";
+import ArticleActiveOrCreate from "@components/articleActiveOrCreate.js";
 
 async function Page({params, searchParams}) {
 
@@ -12,13 +12,13 @@ async function Page({params, searchParams}) {
     * si podria ejecutar el gpt.
     * */
 
-    if (!searchParams?.today) return <HocTemplateArticleActive/>
+    if (!searchParams?.today) return (<ArticleActiveOrCreate/>)
 
-    return (
+    /*return (
         <Suspense fallback={<div>Loading...</div>}>
             <GetDataForIA searchParams={searchParams}/>
         </Suspense>
-    )
+    )*/
 
 }
 

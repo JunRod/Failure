@@ -60,10 +60,6 @@ export async function getArticlesByDay(rangue) {
     }
 }
 
-export function saveArticle(e) {
-    console.log(e.target)
-}
-
 /*
 export async function setData() {
     try {
