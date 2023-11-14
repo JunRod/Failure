@@ -10,7 +10,7 @@ function HocChildrenTransition({children}) {
     return (
         <>
             {children}
-            {transition ? (<Transition/>) : null}
+            {transition ? (<Transition transition={transition}/>) : null}
         </>
 
     );

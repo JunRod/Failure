@@ -18,8 +18,6 @@ import {useRouter} from "next/navigation";
 
 function GeneratorDays() {
 
-    const pathname = usePathname();
-    const segment = useSelectedLayoutSegment()
     const todayRef = useRef();
     const [today, setToday] = useState(new Date().getDate())
     const [twoDay, setTwoDay] = useState(null)
@@ -29,7 +27,6 @@ function GeneratorDays() {
     const DayUltimateMonth = new Date(new Date().getFullYear(), indexMonthSelected + 1, 0).getDate()
     const router = useRouter()
     const resultIsLogin = isLogin()
-
 
     function controllerOnClick(i) {
         /*Verificar que este logeado*/
@@ -46,22 +43,6 @@ function GeneratorDays() {
     function controllerDoubleClick(i) {
         setTwoDay(i);
     }
-
-    useEffect(() => {
-
-        function setSegment() {
-            const conditional = segment !== `${obtenerNombreMesEnEspanol()}/${today}` && null !== segment
-
-            if (conditional) {
-                const [, , month, day] = pathname.split("/")
-                dispatch(setDaySelected(parseInt(day)))
-                dispatch(setMonthSelected(month))
-            }
-
-        }
-
-        setSegment()
-    }, [segment]);
 
     /*Cuando se esta ejecutandfo GPT y apretamos un articulo o el boton para crear un nuevo articulo,
     * se reinicia el rango, entonces si es null, reiniciamos los rangos de today y twoDay

@@ -7,13 +7,14 @@ import {
     addRange,
     createDocumentAndInsertOrInsert, saveGenerateInState,
     setArticleActive,
-    setCreateArticle, setOptionSelected, setShowConfigGpt,
+    setCreateArticle, setOptionSelected, setRunGPT, setShowConfigGpt,
     setUpdateArticle
 } from "@store/diarySlice.js";
 import OptionsGpt from "@components/optionsGpt.js";
 import SaveButton from "@components/saveButton.js";
 import ObjectID from "bson-objectid";
 import {usePathname} from "next/navigation";
+import {toast} from "sonner";
 
 function TemplateArticle() {
 
@@ -55,14 +56,24 @@ function TemplateArticle() {
 
             const {today, twoDay} = range
 
-            const resultRange = dataUserActive.data
+            const MoreThanOne = dataUserActive.data
                 .filter((document) =>
                     ((document.day <= twoDay && document.day >= today) || (document.day <= today && document.day >= twoDay))
                 )
                 .map(document => document.articles)
                 .flat()
-                .map((article, index) => `[Nota ${index + 1}]: ${article.content}`)
+
+            if (MoreThanOne.length < 2) {
+                toast.error('Debe haber al menos 2 articulos para generar')
+                dispatch(setRunGPT(false))
+                dispatch(setShowConfigGpt(false))
+                dispatch(setOptionSelected(null))
+                return null
+            }
+
+            const resultRange = MoreThanOne.map((article, index) => `[Nota ${index + 1}]: ${article.content}`)
                 .join('\n')
+
             const promptFinal = `${optionSelected} que se repiten al menos 2 veces. Por favor, enumera cada hábito seguido de un salto de línea y la cantidad de veces que se repitió: \\n${resultRange}`
             complete(promptFinal)
         }
@@ -184,6 +195,7 @@ function TemplateArticle() {
             value={completion?.length === 0 ? 'Generando...' : completion}
             name="content"
             wrap="hard"
+            readOnly={true}
         />
         <SaveButton setSaveGenerate={setSaveGenerate} showButtonSave={showButtonSave}/>
     </>)

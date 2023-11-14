@@ -295,10 +295,38 @@
     word-break: break-all;
 }
 
+.transition {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fadeOff {
+    opacity: 1;
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .bartender {
     position: fixed;
-    height: 100%;
-    width: 100%;
     top: 0;
     left: 0;
     right: 0;
@@ -311,8 +339,8 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     animation-name: toff;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     transform: translateX(0%);
 }
@@ -332,8 +360,8 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     animation-name: tend;
-    animation-duration: 0.3s;
-    animation-timing-function: ease-in;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
     transform: translateX(-100%);
 }
@@ -555,16 +583,15 @@
 
 .optionButton, .proponer {
     opacity: 0;
-    animation: fadeIn 0.5s ease-in-out forwards;
-    animation-delay: 0.5s; /* Retraso para el primer botón */
+    animation: fadeIn 0.2s ease-in-out forwards;
 }
 
 .optionButton:nth-child(2) {
-    animation-delay: 1s; /* Retraso para el segundo botón */
+    animation-delay: .3s; /* Retraso para el segundo botón */
 }
 
 .proponer {
-    animation-delay: 1.5s; /* Retraso para el enlace */
+    animation-delay: .6s; /* Retraso para el enlace */
 }
 
 .optionButton:hover {
@@ -579,7 +606,7 @@
     height: auto;
     width: 100%;
     opacity: 0; /* Inicialmente oculto */
-    animation: fadeIn 0.5s ease-in-out forwards;
+    animation: fadeIn 0.2s ease-in-out forwards;
 }
 
 .optionButton {
