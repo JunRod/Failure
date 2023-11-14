@@ -19,6 +19,9 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
     : 'http://localhost:3000';
 
 export const metadata = {
+    images: {
+        url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
+    },
     description: 'ToFailure: Diario con IA',
     metadataBase: new URL(baseUrl),
     title: {
@@ -37,7 +40,7 @@ export const metadata = {
         creator: '@JuNRod_',
         creatorId: '1467726470533754880',
         images: {
-            url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699988864/new_h4ucvo.jpg',
+            url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
             alt: 'Frame ToFailure',
         },
     },
@@ -55,12 +58,12 @@ export const metadata = {
         siteName: 'ToFailure',
         images: [
             {
-                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699988864/new_h4ucvo.jpg',
+                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
                 width: 800,
                 height: 600,
             },
             {
-                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699988864/new_h4ucvo.jpg',
+                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
                 width: 1800,
                 height: 1600,
                 alt: 'Og Image Alt',
