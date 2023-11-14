@@ -15,7 +15,7 @@ export default async function Image() {
     return new ImageResponse(
         (
             <div>
-                <img src={"https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png"} alt="d"/>
+                <img src={"https://res.cloudinary.com/dabwdkdys/image/upload/v1699988864/new_h4ucvo.jpg"} alt="d"/>
             </div>
         ),
         {
