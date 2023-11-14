@@ -226,3 +226,4 @@ function TemplateArticle() {
 }
 
 export default TemplateArticle;
+
