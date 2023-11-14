@@ -1,6 +1,5 @@
 'use client'
 
-import Link from "next/link";
 import Diary from "@styles/diary.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {setOptionSelected, setTransition} from "@store/diarySlice.js";
@@ -20,10 +19,13 @@ function OptionsGpt() {
 
     return (
         <section className={Diary.optionsGPT}>
-            <button value={'Encontrar habitos negativos'} onClick={optionsSelected}>Encontrar habitos negativos
+            <button className={Diary.optionButton} value={'Encontrar habitos negativos'}
+                    onClick={optionsSelected}>Encontrar habitos negativos
             </button>
-            <button value={'Encontrar habitos negativos'} onClick={optionsSelected}>Encontrar habitos positivos</button>
-            <Link href={''}>Proponer nuevas opciones</Link>
+            <button className={Diary.optionButton} value={'Encontrar habitos negativos'}
+                    onClick={optionsSelected}>Encontrar habitos positivos
+            </button>
+            <p className={Diary.proponer}>Proponer nuevas opciones</p>
         </section>
     );
 }

@@ -13,7 +13,24 @@ import Diary from "@styles/diary.module.css";
 const inter = Inter({subsets: ['latin']})
 
 export const metadata = {
-    title: 'ToFailure', description: 'ToFailure: Diario con IA',
+    description: 'ToFailure: Diario con IA',
+    title: 'ToFailure',
+    generator: 'Next.js',
+    applicationName: 'ToFailure: Diario con IA',
+    referrer: 'origin-when-cross-origin',
+    keywords: ['Diary', 'IA', 'ChatGPT'],
+    authors: [{name: 'JuRNod'}],
+    creator: 'JuNRod',
+    publisher: 'JuNRod',
+    twitter: {
+        card: 'summary_large_image',
+        title: 'ToFailure: Diario con IA',
+        description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
+        siteId: '1467726470533754882',
+        creator: '@JuNRod_',
+        images: ['twitter-image.png'],
+    },
+    category: 'Artificial Intelligence',
 }
 
 export default function RootLayout({children}) {

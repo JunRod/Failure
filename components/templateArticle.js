@@ -7,7 +7,7 @@ import {
     addRange,
     createDocumentAndInsertOrInsert, saveGenerateInState,
     setArticleActive,
-    setCreateArticle, setOptionSelected, setRunGPT, setShowConfigGpt,
+    setCreateArticle, setOptionSelected, setShowConfigGpt,
     setUpdateArticle
 } from "@store/diarySlice.js";
 import OptionsGpt from "@components/optionsGpt.js";
@@ -32,9 +32,8 @@ function TemplateArticle() {
         optionSelected,
         range
     } = useSelector(state => state.diary)
-    const [showButtonSave, setShowButtonSave] = useState(false)
+    const [showButtonSave, setShowButtonSave] = useState(true)
     const [saveGenerate, setSaveGenerate] = useState(false)
-    const [prompt, setPrompt] = useState(null)
     const pathname = usePathname()
 
     /*SDK IA Vercel*/
@@ -64,12 +63,8 @@ function TemplateArticle() {
                 .flat()
                 .map((article, index) => `[Nota ${index + 1}]: ${article.content}`)
                 .join('\n')
-            /*
-                        const promptFinal = `${optionSelected} que se repiten al menos 2 veces. Por favor, enumera cada hábito seguido de un salto de línea y la cantidad de veces que se repitió: \\n${resultRange}`
-            */
-            const promptFinal = 'dame 40 palabras aleatorias'
+            const promptFinal = `${optionSelected} que se repiten al menos 2 veces. Por favor, enumera cada hábito seguido de un salto de línea y la cantidad de veces que se repitió: \\n${resultRange}`
             complete(promptFinal)
-            setPrompt(promptFinal)
         }
 
         setComplete()
