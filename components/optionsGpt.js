@@ -22,7 +22,7 @@ function OptionsGpt() {
             <button className={Diary.optionButton} value={'Encontrar habitos negativos'}
                     onClick={optionsSelected}>Encontrar habitos negativos
             </button>
-            <button className={Diary.optionButton} value={'Encontrar habitos negativos'}
+            <button className={Diary.optionButton} value={'Encontrar habitos positivos'}
                     onClick={optionsSelected}>Encontrar habitos positivos
             </button>
             <p className={Diary.proponer}>Proponer nuevas opciones</p>

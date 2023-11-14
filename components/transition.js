@@ -25,13 +25,12 @@ function Transition({transition}) {
         if (!value) {
             dispatch(setShowConfigGpt(false))
             dispatch(setOptionSelected(null))
-
-
-            setTransitionLocal(false)
-            setTimeout(() => {
-                dispatch(setTransition(null))
-            }, 800)
         }
+
+        setTransitionLocal(false)
+        setTimeout(() => {
+            dispatch(setTransition(null))
+        }, 800)
     }
 
     useEffect(() => {
