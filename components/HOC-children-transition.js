@@ -8,12 +8,11 @@ function HocChildrenTransition({children}) {
     const {transition} = useSelector(state => state.diary)
 
     return (
-        <body>
-        <div>
+        <>
             {children}
             {transition ? (<Transition/>) : null}
-        </div>
-        </body>
+        </>
+
     );
 }
 

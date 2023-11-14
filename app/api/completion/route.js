@@ -11,16 +11,22 @@ export async function POST(req) {
     try {
         const {prompt} = await req.json();
 
-        const response = await openai.completions.create({
+        const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             stream: true,
-            messages: `Quiero dejar mis malos habitos. Encuentra patrones negativos en ${prompt} y muestramelos punto por punto.`
+            messages: [
+                {
+                    "role": "user",
+                    "content": `${prompt}`
+                }
+            ]
         });
 
         const stream = OpenAIStream(response);
 
         return new StreamingTextResponse(stream);
     } catch (error) {
+        console.error(error);
         if (error instanceof OpenAI.APIError) {
             const {name, status, headers, message} = error;
             return NextResponse.json({name, status, headers, message}, {status});

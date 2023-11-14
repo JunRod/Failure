@@ -1,7 +1,6 @@
-import IATextEffect from "@components/IATextEffect.js";
 import {getArticlesByDay} from "@db/index.js";
-import {OpenAIChat} from "@ia/index.js";
 import {collectionsToString} from "@lib/utils.js";
+import TemplateArticle from "@components/templateArticle.js";
 
 async function GetDataForIA({searchParams}) {
 
@@ -15,16 +14,7 @@ async function GetDataForIA({searchParams}) {
     /*Agarramos los collection.content de las colecciones y convertirmos a un solo string*/
     const contentsString = collectionsToString(articles)
 
-    const ia = new OpenAIChat("dP78Zavrx8kpmFZt2Z1Iz5p4BeFXe4zrAH_ytbNsB0w")
-
-    const result = await ia.main(contentsString);
-    const chunks = [];
-
-    for await (const chunk of result) {
-        chunks.push(chunk);
-    }
-
-    return <IATextEffect chunks={chunks}/>
+    return <TemplateArticle contentsString={contentsString}/>
 }
 
 export default GetDataForIA;

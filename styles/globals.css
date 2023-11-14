@@ -1,5 +1,11 @@
 html {
     box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
 *, *:before, *:after {
@@ -7,20 +13,80 @@ html {
 }
 
 body {
+    margin: 0;
     background-color: #212529;
-    margin: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
     overflow: hidden;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    display: flex;
+    height: 93vh;
+    width: 1300px;
+    gap: 10px;
+    position: relative;
 }
 
-body div {
+header {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+main {
+    height: 100%;
+    width: 100%;
     gap: 20px;
     display: flex;
     flex-direction: row;
-    height: 600px;
-    width: 1280px;
+    overflow: hidden;
+    position: relative;
 }
 
+#login {
+    position: absolute;
+    right: 0;
+}
+
+footer {
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+footer a {
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+footer a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background-color: white;
+    transition: width 0.2s ease;
+}
+
+footer a:hover:after {
+    width: 100%;
+}
+
+.toaster {
+    position: absolute;
+}

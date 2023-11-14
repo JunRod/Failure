@@ -2,40 +2,22 @@
 
 import Diary from "@styles/diary.module.css";
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector/*, useDispatch*/} from "react-redux";
-/*import {setKeyActive} from "@store/diarySlice";*/
-import {createUrl} from "@lib/utils.js";
-import {usePathname, redirect} from "next/navigation";
-import {setTransition} from "@store/diarySlice.js";
+import {useDispatch, useSelector} from "react-redux";
+import {setShowConfigGpt} from "@store/diarySlice.js";
+import {toast} from "sonner";
 
 
 function GptButton() {
 
     const dispatch = useDispatch();
-    const {range, runGPT/*keyComplete*/} = useSelector(state => state.diary);
+    const {range} = useSelector(state => state.diary);
     const [GPTActive, setGPTActive] = useState(false)
-    const pathname = usePathname()
 
     async function VerifyEverything() {
-        /*Cuando todavia no hay key se abre el icono de config*/
+        if (!range) return toast.error('Debe seleccionar un rango de dias')
 
-        /*if (!keyComplete) return dispatch(setKeyActive(true))*/
-
-        if (!range) return alert("No has seleccionado un rango de dias")
-
-        dispatch(setTransition(`Encontrar patrones desde el ${range.today} hasta el ${range.twoDay}`))
-
+        dispatch(setShowConfigGpt(true))
     }
-
-    useEffect(() => {
-        const isRun = async () => {
-            if (runGPT) {
-                const newUrl = createUrl(pathname, {...range})
-                redirect(newUrl, 'replace')
-            }
-        }
-        isRun()
-    }, [runGPT]);
 
     useEffect(() => {
         /*Cambiamos el color del icono de GPT para dar a entender

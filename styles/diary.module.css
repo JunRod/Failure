@@ -2,6 +2,7 @@
     width: 4%;
     height: 100%;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     gap: 10px;
     z-index: 200;
@@ -24,7 +25,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     gap: 8px;
     align-items: center;
 }
@@ -70,66 +70,21 @@
     padding: 12px 0px;
     font-size: 20px;
     text-decoration: none;
+    margin: 0;
 }
 
 .day:hover {
     background-color: #6C757D;
+    z-index: 10;
 }
 
 .monthActive {
     background-color: #6C757D;
 }
 
-.containerBlockTwo {
-    width: 95%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-
-}
-
-.containerArticles {
-    height: 100%;
-    width: 100%;
-    gap: 15px;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    color: #FFF;
-}
-
-.containerArticles::-webkit-scrollbar {
-    width: 0;
-}
-
-.article {
-    position: relative;
-    height: auto;
-    width: 100%;
-    background-color: #343A40;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-}
-
-
-.article:hover {
-    background-color: #6C757D;
-}
-
-.article h1, .article p {
-    margin: 0;
-}
-
-.article h1 {
-    font-size: 22px;
-}
-
 .containerArticle {
+    position: relative;
+    gap: 3px;
     background-color: #343A40;
     height: 100%;
     width: 50%;
@@ -138,34 +93,85 @@
     padding: 20px;
     color: #FFF;
     font-size: 22px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     overflow-wrap: break-word;
 }
 
+.article {
+    gap: 8px;
+    position: relative;
+    width: 100%;
+    max-height: 200px;
+    background-color: #343A40;
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
 
-.containerArticle::-webkit-scrollbar {
-    width: 0px; /* Cambia el ancho de la barra */
 }
 
-.containerArticle::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+
+.article:hover {
+    background-color: #6C757D;
 }
 
-.containerArticle h1 {
+
+.article:hover .deleteActive {
+    display: none !important;
+
+}
+
+.article:hover .delete {
+    display: flex;
+}
+
+.article p {
+    margin: 0;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Número de líneas que deseas mostrar */
+    -webkit-box-orient: vertical;
+}
+
+.containerTitleDelete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.containerTitleDelete h1 {
     margin: 0;
 }
 
-.containerArticle p {
-    font-size: 18px;
+.containerTitleDelete h1::-webkit-scrollbar {
+    width: 0px; /* Ancho de la barra de desplazamiento */
 }
+
 
 .today, .articleActive {
     background-color: #6C757D;
 }
 
+.today:hover {
+    background-color: #6C757D;
+}
+
 .twoDay {
     background-color: #ADB5BD;
+    z-index: 200;
+}
+
+.twoDay:hover {
+    background-color: #ADB5BD;
+    z-index: 200;
 }
 
 .svg {
@@ -281,11 +287,12 @@
     transition: opacity 1s ease;
 }
 
-.task {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 22px;
+.title {
+    position: relative;
+    max-height: 55px;
+    width: 90%;
+    overflow-y: scroll;
+    word-break: break-all;
 }
 
 .bartender {
@@ -433,9 +440,6 @@
     display: none;
 }
 
-.article:hover i .delete {
-    display: flex;
-}
 
 .createArticle {
     width: 100%;
@@ -473,19 +477,7 @@
     width: 50%
 }
 
-.containerTemplateCreateArticle {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.containerTemplateCreateArticle {
-    height: 100%;
-}
-
-.containerTemplateCreateArticle textarea {
+.containerArticle textarea {
     resize: none;
     color: white;
     border: 0;
@@ -494,35 +486,144 @@
     width: 100%;
 }
 
-.containerTemplateCreateArticle textarea:nth-child(1) {
-    height: 40px;
-    font-size: 26px;
-    font-weight: bold;
-}
-
-.containerTemplateCreateArticle textarea:nth-child(2) {
-    height: 100%;
-    font-size: 18px;
-}
-
-.containerArticle input {
-    color: white;
-    border: 0;
-    background-color: #343A40;
-    width: 100%;
-    height: 24px;
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.containerArticle input:focus {
-    outline: none;
-}
-
-.containerArticle textarea::-webkit-scrollbar {
-    width: 0;
-}
-
 .containerArticle textarea:focus {
     outline: none;
+}
+
+.containerArticle textarea[name="titleNote"] {
+    min-height: 20px;
+    height: auto;
+    font-size: 26px;
+    font-weight: bold;
+    z-index: 20;
+    overflow-y: auto;
+    line-height: 28px;
+}
+
+.containerArticle textarea[name="titleNote"]::-webkit-scrollbar {
+    width: 1px;
+}
+
+.containerArticle textarea[name="titleNote"]::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+}
+
+.containerArticle textarea[name="content"] {
+    height: 100%;
+    font-size: 18px;
+    overflow-y: auto;
+}
+
+.containerArticle textarea[name="content"]::-webkit-scrollbar {
+    width: 1px;
+}
+
+.containerArticle textarea[name="content"]::-webkit-scrollbar-thumb {
+    background-color: #ffffff; /* Cambiar al color deseado */
+}
+
+.configButton {
+    height: 10%;
+    width: 100%;
+    background-color: #343A40;
+    border-radius: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.configButton svg {
+    height: 70%;
+    width: 70%;
+    color: white;
+}
+
+.optionsGPT {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 90%;
+}
+
+.buttonSave {
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 20px 0 0px;
+    transition: opacity 0.2s ease, margin 0.1s ease;
+}
+
+.saveButtonActive {
+    margin: 0 20px 20px 0px;
+    opacity: 1;
+}
+
+.saveButtonOff {
+    margin: 0 20px 0 0px;
+    opacity: 0;
+}
+
+.containerBlockDos {
+    width: 46%;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+}
+
+.containerGenerateArticles {
+    overflow-y: scroll;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+.containerGenerateArticles::-webkit-scrollbar, .containerGenerates::-webkit-scrollbar {
+    width: 0px; /* Ancho del scroll */
+}
+
+.containerGenerates {
+    width: 50%;
+    height: 100%;
+    overflow-y: scroll;
+    flex-direction: column;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.notFound {
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    color: white;
+}
+
+.auth0Link {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth0Link:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0%;
+    background-color: white;
+    transition: width 0.2s ease;
+}
+
+.auth0Link:hover:after {
+    width: 100%;
 }

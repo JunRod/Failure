@@ -2,7 +2,7 @@
 
 import Diary from '../styles/diary.module.css';
 import {useDispatch, useSelector} from "react-redux";
-import {setRunGPT, setTransition} from "@store/diarySlice.js";
+import {setArticleActive, setCreateArticle, setRunGPT, setTransition} from "@store/diarySlice.js";
 
 function Transition() {
 
@@ -11,6 +11,9 @@ function Transition() {
 
     function exec(value) {
         dispatch(setRunGPT(value))
+        dispatch(setArticleActive(null))
+        dispatch(setCreateArticle(false))
+
         setTimeout(() => {
             dispatch(setTransition(null))
         }, 600)

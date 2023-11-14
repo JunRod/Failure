@@ -1,4 +1,5 @@
-import {MongoClient, ServerApiVersion} from 'mongodb'
+import {MongoClient, ObjectId, ServerApiVersion} from 'mongodb'
+import {sort} from "@node_modules/next/dist/build/webpack/loaders/css-loader/src/utils.js";
 
 const uri = "mongodb+srv://junior:junior123@cluster0.msp1exz.mongodb.net/?retryWrites=true&w=majority";
 
@@ -7,6 +8,8 @@ export const client = new MongoClient(uri, {
         version: ServerApiVersion.v1, strict: true, deprecationErrors: true,
     }
 });
+
+const collection = client.db("war-mode-db").collection("articles");
 
 export async function connect() {
     try {
@@ -21,9 +24,7 @@ connect().catch(console.error)
 
 export async function getArticles(month, day) {
     try {
-        const database = client.db("war-mode-db");
-        const collection = database.collection("articles");
-        const result = await collection?.find({day, month})?.toArray()
+        const result = await collection?.find({day, month}).toArray()
         return result ?? []
     } catch (e) {
         console.error(e)
@@ -60,46 +61,29 @@ export async function getArticlesByDay(rangue) {
     }
 }
 
-/*
-export async function setData() {
-    try {
-        const database = client.db("war-mode-db");
-        const collection = database.collection("articles");
-        await collection?.insertMany([{
-            day: 4, articles: [{
-                id: 1,
-                task: 'Autodidacta',
-                titleNote: "Pensamientos",
-                content: "Me dormi ayer a las 10 AM, y comence a estudiar 1 hora despues."
-            }, {
-                id: 2, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
-            }, {
-                id: 3, task: 'Leer', titleNote: "Pensamientos", content: "Lei 1 hora en lugar de dos."
-            }, {
-                id: 4, task: 'Leer', titleNote: "Pensamientos", content: "Complete la tarea de dormir."
-            }, {
-                id: 5, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
-            },]
-        }, {
-            day: 3, articles: [{
-                id: 1,
-                task: 'Leer',
-                titleNote: "Pensamientos",
-                content: "Lei todas las horas."
-            }, {
-                id: 2, task: 'Boxeo', titleNote: "Pensamientos", content: "Entrene bien"
-            }, {
-                id: 3, task: 'Leer', titleNote: "Pensamientos", content: "Lei 1 hora en lugar de dos."
-            }, {
-                id: 4, task: 'Leer', titleNote: "Pensamientos", content: "Complete la tarea de dormir."
-            }, {
-                id: 5, task: 'Boxeo', titleNote: "Pensamientos", content: "Me dormi y no fui a entrenar"
-            },]
-        }
+export async function getOrCreateUser(email) {
+    let query = {
+        "user": email
+    };
 
-        ])
-    } catch (e) {
-        console.error(e)
+    let result = ''
+
+    try {
+        result = await collection.findOne(query);
+    } catch (err) {
+        console.log("Error occurred while executing findOne:", err.message);
+        return {error: err.message};
     }
+
+    if (!result) {
+        try {
+            const newDocument = {user: email, articles: []};
+            result = await collection.insertOne(newDocument);
+        } catch (err) {
+            console.log("Error occurred while executing findOne:", err.message);
+            return {error: err.message};
+        }
+    }
+
+    return result
 }
-*/

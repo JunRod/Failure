@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Diary from "@styles/diary.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {setOnMonth, setOnMonthDayText} from "@store/diarySlice.js";
