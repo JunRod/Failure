@@ -36,7 +36,10 @@ export const metadata = {
         description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
         creator: '@JuNRod_',
         creatorId: '1467726470533754880',
-        images: ['https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png'],
+        images: {
+            url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
+            alt: 'Frame ToFailure',
+        },
     },
 
     icons: {
