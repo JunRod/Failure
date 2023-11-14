@@ -13,6 +13,8 @@ import {
 } from "@store/diarySlice";
 import {usePathname, useSelectedLayoutSegment} from "next/navigation";
 import {mesesAbreviadosEnEspanol, obtenerNombreMesEnEspanol} from "@lib/utils.js";
+import isLogin from "@components/isLogin.js";
+import {useRouter} from "next/navigation";
 
 function GeneratorDays() {
 
@@ -25,8 +27,14 @@ function GeneratorDays() {
     const {onMonth, onMonthDayText, MonthSelected, daySelected, range} = useSelector(state => state.diary)
     const indexMonthSelected = mesesAbreviadosEnEspanol.indexOf(MonthSelected)
     const DayUltimateMonth = new Date(new Date().getFullYear(), indexMonthSelected + 1, 0).getDate()
+    const router = useRouter()
+    const resultIsLogin = isLogin()
+
 
     function controllerOnClick(i) {
+        /*Verificar que este logeado*/
+        if (!resultIsLogin) return router.push('/api/auth/login')
+
         setToday(i);
         dispatch(setDaySelected(i))
         dispatch(setArticleActive(null))

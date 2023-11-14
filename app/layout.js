@@ -10,10 +10,9 @@ import ButtonGeneradosOrDiario from "@components/buttonGeneradosOrDiario.js";
 import TemplateArticle from "@components/templateArticle.js";
 import Diary from "@styles/diary.module.css";
 import {Analytics} from '@vercel/analytics/react';
+import {GeistSans} from "geist/font/sans";
 
-const inter = Inter({subsets: ['latin']})
-
-const {TWITTER_CREATOR, TWITTER_SITE, SITE_NAME} = process.env;
+const {SITE_NAME} = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : 'http://localhost:3000';
@@ -43,9 +42,9 @@ export const metadata = {
     },
 
     icons: {
-        icon: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
-        shortcut: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
-        apple: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
+        icon: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
+        shortcut: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
+        apple: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
     },
 
     openGraph: {
@@ -70,7 +69,7 @@ export const metadata = {
 export default function RootLayout({children}) {
 
     return (<Providers>
-        <html lang="en" className={inter.className}>
+        <html lang="en" className={GeistSans.className}>
         <UserProvider>
             <body>
             <ToasterJs/>

@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setShowConfigGpt} from "@store/diarySlice.js";
 import {toast} from "sonner";
+import isLogin from "@components/isLogin.js";
+import {useRouter} from 'next/navigation'
 
 
 function GptButton() {
@@ -12,8 +14,13 @@ function GptButton() {
     const dispatch = useDispatch();
     const {range} = useSelector(state => state.diary);
     const [GPTActive, setGPTActive] = useState(false)
+    const router = useRouter()
+    const resultIsLogin = isLogin()
 
     async function VerifyEverything() {
+        /*Verificar que este logeado*/
+        if (!resultIsLogin) return router.push('/api/auth/login')
+
         if (!range) return toast.error('Debe seleccionar un rango de dias')
 
         dispatch(setShowConfigGpt(true))

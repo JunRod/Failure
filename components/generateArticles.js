@@ -82,7 +82,7 @@ function GenerateArticles() {
     }, [dataUserActive, daySelected, MonthSelected]);
 
     return articles.length === 0 ?
-        (<h1 className={Diary.notFound}>Ups! No se encontraron articulos</h1>)
+        (<h1 className={`${Diary.notFound}`}>Ups! No se encontraron articulos</h1>)
         :
         (articles?.map(article => {
 

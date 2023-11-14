@@ -6,12 +6,17 @@ import Diary from "@styles/diary.module.css";
 import {setArticleActive, setMonthSelected} from "@store/diarySlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef} from "react";
+import isLogin from "@components/isLogin.js";
+import {useRouter} from "next/navigation";
 
 function GeneratorMonths() {
 
     const dispatch = useDispatch();
     const {MonthSelected} = useSelector(state => state.diary)
     const currentMonth = useRef();
+    const router = useRouter()
+    const resultIsLogin = isLogin()
+
 
     useEffect(() => {
         const monthElement = currentMonth.current
@@ -24,6 +29,9 @@ function GeneratorMonths() {
     }, []);
 
     function controllerOnClick(mes) {
+        /*Verificar que este logeado*/
+        if (!resultIsLogin) return router.push('/api/auth/login')
+
         dispatch(setMonthSelected(mes))
         dispatch(setArticleActive(null))
     }
