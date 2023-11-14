@@ -9,12 +9,27 @@ import {Suspense} from "react";
 import ButtonGeneradosOrDiario from "@components/buttonGeneradosOrDiario.js";
 import TemplateArticle from "@components/templateArticle.js";
 import Diary from "@styles/diary.module.css";
+import {Analytics} from '@vercel/analytics/react';
 
 const inter = Inter({subsets: ['latin']})
 
+const {TWITTER_CREATOR, TWITTER_SITE, SITE_NAME} = process.env;
+const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : 'http://localhost:3000';
+
 export const metadata = {
     description: 'ToFailure: Diario con IA',
-    title: 'ToFailure',
+    metadataBase: new URL(baseUrl),
+    title: {
+        default: SITE_NAME,
+        template: `%s | ${SITE_NAME}`
+    },
+    robots: {
+        follow: true,
+        index: true
+    },
+
     generator: 'Next.js',
     applicationName: 'ToFailure: Diario con IA',
     referrer: 'origin-when-cross-origin',
@@ -47,7 +62,9 @@ export default function RootLayout({children}) {
             </header>
             <HocChildrenTransition>
                 <main>
-                    {children}
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {children}
+                    </Suspense>
                     <div className={Diary.containerArticle}>
                         <TemplateArticle/>
                     </div>
@@ -56,6 +73,7 @@ export default function RootLayout({children}) {
                     <ButtonGeneradosOrDiario/>
                 </footer>
             </HocChildrenTransition>
+            <Analytics/>
             </body>
         </UserProvider>
         </html>
