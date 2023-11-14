@@ -1,7 +1,7 @@
 'use client'
 
 import {memo, useEffect, useState} from "react";
-import {useApp} from "@realm-web/useApp.js";
+import {realmApp} from "@realm-web/realmApp.js";
 import {useDispatch, useSelector} from "react-redux";
 import {setDataUserActive} from "@store/diarySlice.js";
 import Diary from "@styles/diary.module.css";
@@ -18,10 +18,10 @@ const Logout = memo(function Logout({email}) {
         console.log(result)
     }
 
-    async function getAppSessionRealm() {
+    async function GetAppSessionRealm() {
         if (dataUserActive) return null
         if (appSessionRealm) return null
-        const app = await useApp()
+        const app = await realmApp()
         setAppSessionRealm(app)
     }
 
@@ -49,7 +49,7 @@ const Logout = memo(function Logout({email}) {
             *  dataUserActive a mongodb, de tal manera que si el usuario borra el localSotrage, podamos recuperar
             * los datos de mongodb.
             * */
-            getAppSessionRealm()
+            GetAppSessionRealm()
         }
 
         getLocalStorage()
