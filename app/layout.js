@@ -35,9 +35,37 @@ export const metadata = {
         title: 'ToFailure: Diario con IA',
         description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
         creator: '@JuNRod_',
-        images: ['twitter-image.png'],
+        creatorId: '1467726470533754880',
+        images: ['https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png'],
     },
-    category: 'Artificial Intelligence',
+
+    icons: {
+        icon: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
+        shortcut: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
+        apple: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986071/favicon_ni6t4i.png',
+    },
+
+    openGraph: {
+        title: 'ToFailure: Diario con IA',
+        description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
+        url: "https://tofailure.vercel.app",
+        siteName: 'ToFailure',
+        images: [
+            {
+                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
+                width: 800,
+                height: 600,
+            },
+            {
+                url: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png',
+                width: 1800,
+                height: 1600,
+                alt: 'Og Image Alt',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
 }
 
 export default function RootLayout({children}) {
