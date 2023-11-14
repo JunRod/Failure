@@ -29,19 +29,11 @@ export const metadata = {
         follow: true,
         index: true
     },
-
-    generator: 'Next.js',
-    applicationName: 'ToFailure: Diario con IA',
-    referrer: 'origin-when-cross-origin',
     keywords: ['Diary', 'IA', 'ChatGPT'],
-    authors: [{name: 'JuRNod'}],
-    creator: 'JuNRod',
-    publisher: 'JuNRod',
     twitter: {
         card: 'summary_large_image',
         title: 'ToFailure: Diario con IA',
         description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
-        siteId: '1467726470533754882',
         creator: '@JuNRod_',
         images: ['twitter-image.png'],
     },
