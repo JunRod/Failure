@@ -1,7 +1,6 @@
 'use client'
 
 import Diary from "@styles/diary.module.css";
-import {useDispatch} from "react-redux";
 import {
     addRange,
     setArticleActive,
@@ -9,17 +8,18 @@ import {
     setOptionSelected,
     setRunGPT,
     setShowConfigGpt
-} from "@store/diarySlice.js";
+} from "@redux/diarySlice";
 import ObjectID from "bson-objectid";
 import {useRouter} from "next/navigation";
-import isLogin from "@components/isLogin.js";
+import isLogin from "@components/isLogin";
+import {useAppDispatch} from "@redux/hooks";
 
 function CreateArticle() {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const router = useRouter()
     const resultIsLogin = isLogin()
-    
+
 
     function controllerCreateArticle() {
         /*Verificar que este logeado*/

@@ -4,15 +4,15 @@ import {NextResponse} from "next/server";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    baseURL: `https://api.naga.ac/v1`,
+    baseURL: `https://api.mandrillai.tech/v1`,
 });
 
-export async function POST(req) {
+export async function POST(req: Request) {
     try {
         const {prompt} = await req.json();
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-4',
             stream: true,
             messages: [
                 {

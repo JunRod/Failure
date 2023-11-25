@@ -2,33 +2,31 @@
 
 import {useEffect, useRef, useState} from "react";
 import Diary from "@styles/diary.module.css";
-import {useDispatch, useSelector} from "react-redux";
 import {
     addRange,
     setArticleActive,
     setDaySelected,
-    setMonthSelected,
     setOnMonth, setOptionSelected, setRunGPT,
     setShowConfigGpt
-} from "@store/diarySlice";
-import {usePathname, useSelectedLayoutSegment} from "next/navigation";
-import {mesesAbreviadosEnEspanol, obtenerNombreMesEnEspanol} from "@lib/utils.js";
-import isLogin from "@components/isLogin.js";
+} from "@redux/diarySlice";
+import {mesesAbreviadosEnEspanol} from "@lib/utils";
+import isLogin from "@components/isLogin";
 import {useRouter} from "next/navigation";
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
 function GeneratorDays() {
 
-    const todayRef = useRef();
-    const [today, setToday] = useState(new Date().getDate())
-    const [twoDay, setTwoDay] = useState(null)
-    const dispatch = useDispatch();
-    const {onMonth, onMonthDayText, MonthSelected, daySelected, range} = useSelector(state => state.diary)
+    const todayRef = useRef<HTMLParagraphElement | null>(null);
+    const [today, setToday] = useState<number>(new Date().getDate())
+    const [twoDay, setTwoDay] = useState<number | null>(null)
+    const dispatch = useAppDispatch();
+    const {onMonth, onMonthDayText, MonthSelected, daySelected, range} = useAppSelector(state => state.diary)
     const indexMonthSelected = mesesAbreviadosEnEspanol.indexOf(MonthSelected)
     const DayUltimateMonth = new Date(new Date().getFullYear(), indexMonthSelected + 1, 0).getDate()
     const router = useRouter()
     const resultIsLogin = isLogin()
 
-    function controllerOnClick(i) {
+    function OnClick(i: number) {
         /*Verificar que este logeado*/
         if (!resultIsLogin) return router.push('/api/auth/login')
 
@@ -40,7 +38,7 @@ function GeneratorDays() {
         dispatch(setRunGPT(false))
     }
 
-    function controllerDoubleClick(i) {
+    function onDoubleClick(i: number) {
         setTwoDay(i);
     }
 
@@ -84,8 +82,8 @@ function GeneratorDays() {
 
             return (
                 <p
-                    onDoubleClick={() => controllerDoubleClick(i + 1)}
-                    onClick={() => controllerOnClick(i + 1)}
+                    onDoubleClick={() => onDoubleClick(i + 1)}
+                    onClick={() => OnClick(i + 1)}
                     onMouseOver={() => (onMonth && onMonthDayText) && dispatch(setOnMonth(true))}
                     key={i}
                     className={`${Diary.day} ${isDaySelected ? Diary.today : ''} ${isWithinRange ? Diary.today : ''} ${isTwoDay ? Diary.twoDay : ''}`}

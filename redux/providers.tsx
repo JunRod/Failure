@@ -1,11 +1,12 @@
 "use client"
-import {store} from "@store/store";
+import {store} from "@redux/store";
 import {Provider} from "react-redux";
+import {Props} from "@ts/types";
 
-function Providers(props) {
+function Providers({children}: Props) {
     return (
         <Provider store={store}>
-            {props.children}
+            {children}
         </Provider>
     );
 }

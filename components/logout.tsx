@@ -1,21 +1,22 @@
 'use client'
 
 import {memo, useEffect, useState} from "react";
-import {realmApp} from "@realm-web/realmApp.js";
-import {useDispatch, useSelector} from "react-redux";
-import {setDataUserActive} from "@store/diarySlice.js";
+import {realmApp} from "@realm-web/realmApp";
+import {setDataUserActive} from "@redux/diarySlice";
 import Diary from "@styles/diary.module.css";
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
-const Logout = memo(function Logout({email}) {
+const Logout = memo(function Logout({email}: { email: string }) {
 
-    const dispatch = useDispatch()
-    const {dataUserActive} = useSelector(state => state.diary)
-    const [appSessionRealm, setAppSessionRealm] = useState(null)
+    const dispatch = useAppDispatch()
+    const {dataUserActive} = useAppSelector(state => state.diary)
+    const [appSessionRealm, setAppSessionRealm] = useState<Realm.User | null>(null)
 
     /*Cuando hacemos logout, */
     async function controllerSaveDataUserActiveInMongoDB() {
-        const result = await appSessionRealm.functions.replaceDataUser(dataUserActive)
-        console.log(result)
+        if (!appSessionRealm) return null
+
+        await appSessionRealm.functions.replaceDataUser(dataUserActive)
     }
 
     async function GetAppSessionRealm() {
@@ -40,7 +41,7 @@ const Logout = memo(function Logout({email}) {
 
     useEffect(() => {
         function getLocalStorage() {
-            const resultLocalStorage = JSON.parse(localStorage.getItem(email)) || null
+            const resultLocalStorage = JSON.parse(localStorage.getItem(email) ?? 'null')
 
             /*Si existe en localSotrage ya no hay necesidad de ejecutar realm para traernos los datos de mongo*/
             if (resultLocalStorage) dispatch(setDataUserActive(resultLocalStorage))

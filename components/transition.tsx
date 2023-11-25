@@ -1,7 +1,6 @@
 'use client'
 
 import Diary from '../styles/diary.module.css';
-import {useDispatch, useSelector} from "react-redux";
 import {
     setArticleActive,
     setCreateArticle,
@@ -9,15 +8,16 @@ import {
     setRunGPT,
     setShowConfigGpt,
     setTransition
-} from "@store/diarySlice.js";
+} from "@redux/diarySlice";
 import {useEffect, useState} from "react";
+import {useAppDispatch} from "@redux/hooks";
 
-function Transition({transition}) {
+function Transition({transition}: { transition: string | null }) {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [transitionLocal, setTransitionLocal] = useState(false)
 
-    function exec(value) {
+    function exec(value: boolean) {
         dispatch(setRunGPT(value))
         dispatch(setArticleActive(null))
         dispatch(setCreateArticle(false))

@@ -1,8 +1,61 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {obtenerNombreMesEnEspanol} from "@lib/utils.js";
+import {obtenerNombreMesEnEspanol} from "@lib/utils";
 import ObjectID from "bson-objectid";
+import {WritableDraft} from "@node_modules/immer/src/types/types-external";
 
-const initialState = {
+export interface ArticleActive {
+    id: string,
+    titleNote: string,
+    content: string,
+}
+
+interface DataUserActive {
+    _id: string,
+    user: string,
+    data: Array<Data>,
+    generates: Array<Generate>
+}
+
+interface Data {
+    _id: string,
+    day: number,
+    month: string,
+    articles: Array<Article>
+}
+
+export interface Article {
+    titleNote: string,
+    content: string,
+    id: string,
+
+    [key: string]: string
+}
+
+interface Generate {
+    id: string,
+    prompt: string,
+    content: string,
+}
+
+interface SliceState {
+    range: null | { today: number, twoDay: number },
+    articleActive: null | ArticleActive,
+    /**/
+    transition: null | string,
+    showConfigGpt: boolean,
+    runGPT: boolean,
+    optionSelected: null | string,
+    /**/
+    onMonth: boolean,
+    onMonthDayText: null | string,
+    MonthSelected: string,
+    daySelected: number,
+    createArticle: boolean,
+    dataUserActive: null | DataUserActive,
+    idDocument: null | string,
+}
+
+const initialState: SliceState = {
     range: null,
     articleActive: null,
     /**/
@@ -20,8 +73,7 @@ const initialState = {
     idDocument: null,
 }
 
-
-export const diarySlice = createSlice({
+export const diary = createSlice({
     name: 'diary',
     initialState,
     reducers: {
@@ -57,6 +109,9 @@ export const diarySlice = createSlice({
             state.dataUserActive = payload
         },
         setUpdateArticle: (state, {payload}) => {
+
+            if (state.dataUserActive === null) return
+
             state.dataUserActive = {
                 ...state.dataUserActive,
                 data: state.dataUserActive.data.map(document => {
@@ -76,6 +131,9 @@ export const diarySlice = createSlice({
             state.idDocument = payload
         },
         createDocumentAndInsertOrInsert: (state, {payload}) => {
+
+            if (state.dataUserActive === null) return
+
             const {object, isExistDocument, day, month} = payload
 
             if (isExistDocument) {
@@ -106,6 +164,8 @@ export const diarySlice = createSlice({
         },
         deleteArticle: (state, {payload}) => {
 
+            if (state.dataUserActive === null) return
+
             state.dataUserActive = {
                 ...state.dataUserActive,
                 data: state.dataUserActive.data.map(document => {
@@ -123,8 +183,7 @@ export const diarySlice = createSlice({
                         }
                     }
                     return document
-                })
-                    .filter(document => document !== false)
+                }) as WritableDraft<Data>[]
             }
         },
         setShowConfigGpt: (state, {payload}) => {
@@ -134,12 +193,17 @@ export const diarySlice = createSlice({
             state.optionSelected = payload
         },
         saveGenerateInState: (state, {payload}) => {
+
+            if (state.dataUserActive === null) return
+
             state.dataUserActive = {
                 ...state.dataUserActive,
                 generates: [...state.dataUserActive.generates, payload]
             }
         },
         deleteGenerate: (state, {payload}) => {
+            if (state.dataUserActive === null) return
+
             state.dataUserActive = {
                 ...state.dataUserActive,
                 generates: state.dataUserActive.generates.filter(generate => generate.id !== payload)
@@ -151,7 +215,6 @@ export const diarySlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
     deleteGenerate,
-    reset,
     saveGenerateInState,
     setOptionSelected,
     setShowConfigGpt,
@@ -169,5 +232,7 @@ export const {
     addRange, /*setKeyComplete, setKeyActive,*/
     setArticleActive,
     setTransition
-} = diarySlice.actions
+} = diary.actions
+
+export default diary.reducer
 

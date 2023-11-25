@@ -1,26 +1,35 @@
 'use client'
 
-import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import Diary from "@styles/diary.module.css";
-import {deleteGenerate, setArticleActive} from "@store/diarySlice.js";
+import {deleteGenerate, setArticleActive} from "@redux/diarySlice";
 import {toast} from "sonner";
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
+
+interface Generate {
+    id: string,
+    prompt: string,
+    content: string
+}
 
 function GenerateGenerates() {
 
-    const {dataUserActive, articleActive} = useSelector(state => state.diary)
-    const [generatesState, setGeneratesState] = useState([])
-    const [indexDelete, setIndexDelete] = useState(null)
-    const dispatch = useDispatch()
+    const {dataUserActive, articleActive} = useAppSelector(state => state.diary)
+    const [generatesState, setGeneratesState] = useState<Array<Generate>>([])
+    const [indexDelete, setIndexDelete] = useState<string | null>(null)
+    const dispatch = useAppDispatch()
 
-    function controllerOnClick(generate) {
+    function OnClick(generate: Generate) {
         const {id, prompt: titleNote, content} = generate
         dispatch(setArticleActive({id, titleNote, content}))
     }
 
-    function controllerDelete(id, titleNote) {
+    function controllerDelete(generate: Generate) {
+        const {id, prompt: titleNote} = generate
+
         setIndexDelete(id)
         dispatch(deleteGenerate(id))
+
         /*Verificar si el articulo que estamos borrando se encuentra en article active para tambien borrarlo de ahi*/
         if (id === articleActive?.id) {
             dispatch(setArticleActive(null))
@@ -48,13 +57,13 @@ function GenerateGenerates() {
 
     return generatesState?.map(generate => {
 
-        const {id, prompt} = generate
+        const {id, prompt, content} = generate
 
         const isArticleActive = id === articleActive?.id ?? false
 
         return (
             <div
-                onClick={() => controllerOnClick(generate)}
+                onClick={() => OnClick(generate)}
                 key={generate.id}
                 className={`${Diary.article} ${isArticleActive ? Diary.articleActive : ''}`}
             >
@@ -63,7 +72,7 @@ function GenerateGenerates() {
                     <svg
                         onClick={(e) => {
                             e.stopPropagation()
-                            controllerDelete(id, prompt)
+                            controllerDelete(generate)
                         }}
                         xmlns="http://www.w3.org/2000/svg"
                         className={`${Diary.delete} icon icon-tabler icon-tabler-trash-filled ${indexDelete === id ? Diary.deleteActive : ''}`}
@@ -78,7 +87,7 @@ function GenerateGenerates() {
                             strokeWidth="0" fill="currentColor"></path>
                     </svg>
                 </div>
-                <p>{generate.content}</p>
+                <p>{content}</p>
             </div>
         )
     })

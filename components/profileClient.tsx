@@ -1,9 +1,7 @@
-import Logout from "@components/logout.js";
-import Login from "@components/login.js";
+import Logout from "@components/logout";
+import Login from "@components/login";
 import "@styles/profileClient.css"
 import {getSession} from "@auth0/nextjs-auth0";
-
-export const runtime = 'edge';
 
 async function ProfileClient() {
     const session = await getSession();

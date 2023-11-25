@@ -2,12 +2,12 @@
 
 import {useEffect} from "react";
 import Diary from "@styles/diary.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import {setOnMonth, setOnMonthDayText} from "@store/diarySlice.js";
+import {setOnMonth, setOnMonthDayText} from "@redux/diarySlice";
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
 function MonthOnHover() {
-    const dispatch = useDispatch()
-    const {onMonth, MonthSelected, onMonthDayText, daySelected} = useSelector(state => state.diary)
+    const dispatch = useAppDispatch()
+    const {onMonth, MonthSelected, onMonthDayText, daySelected} = useAppSelector(state => state.diary)
 
     useEffect(() => {
         if (onMonth) dispatch(setOnMonthDayText(new Date().getDate()))

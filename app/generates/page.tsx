@@ -1,5 +1,5 @@
 import Diary from "@styles/diary.module.css";
-import GenerateGenerates from "@components/generateGenerates.js";
+import GenerateGenerates from "@components/generateGenerates";
 
 function Page() {
     return (

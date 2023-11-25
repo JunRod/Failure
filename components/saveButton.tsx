@@ -4,7 +4,12 @@ import Diary from "@styles/diary.module.css";
 import {memo} from "react";
 import {toast} from "sonner";
 
-const SaveButton = memo(function SaveButton({setSaveGenerate, showButtonSave}) {
+interface Props {
+    setSaveGenerate: (value: boolean) => void,
+    showButtonSave: boolean
+}
+
+const SaveButton = memo(function SaveButton({setSaveGenerate, showButtonSave}: Props) {
 
     function controllerOnClick() {
         setSaveGenerate(true)

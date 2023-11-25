@@ -1,26 +1,26 @@
 'use client'
 
-import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useRef, useState} from "react";
 import {useCompletion} from "ai/react";
 import {
-    addRange,
+    Article,
     createDocumentAndInsertOrInsert, saveGenerateInState,
     setArticleActive,
     setCreateArticle, setOptionSelected, setRunGPT, setShowConfigGpt,
     setUpdateArticle
-} from "@store/diarySlice.js";
-import OptionsGpt from "@components/optionsGpt.js";
-import SaveButton from "@components/saveButton.js";
+} from "@redux/diarySlice";
+import OptionsGpt from "@components/optionsGpt";
+import SaveButton from "@components/saveButton";
 import ObjectID from "bson-objectid";
 import {usePathname} from "next/navigation";
 import {toast} from "sonner";
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
 function TemplateArticle() {
 
-    const textareaContentRef = useRef();
-    const refTitleNote = useRef();
-    const dispatch = useDispatch()
+    const textareaContentRef = useRef<HTMLTextAreaElement | null>(null);
+    const refTitleNote = useRef<HTMLTextAreaElement | null>(null);
+    const dispatch = useAppDispatch()
     const {
         runGPT,
         showConfigGpt,
@@ -32,7 +32,7 @@ function TemplateArticle() {
         daySelected,
         optionSelected,
         range
-    } = useSelector(state => state.diary)
+    } = useAppSelector(state => state.diary)
     const [showButtonSave, setShowButtonSave] = useState(true)
     const [saveGenerate, setSaveGenerate] = useState(false)
     const pathname = usePathname()
@@ -51,8 +51,7 @@ function TemplateArticle() {
     /*Ni bien contentsString tiene algo, se manda a GPT atravez de complete.*/
     useEffect(() => {
         function setComplete() {
-            if (!runGPT) return null
-            if (!optionSelected) return null
+            if (!runGPT || !optionSelected || !dataUserActive || !range) return null
 
             const {today, twoDay} = range
 
@@ -85,7 +84,7 @@ function TemplateArticle() {
     useEffect(() => {
 
         function controllerSaveGenerate() {
-            if (!saveGenerate) return null
+            if (!saveGenerate || !range) return null
             const newObject = {
                 id: ObjectID().toHexString(),
                 prompt: `${optionSelected} desde el ${range.today} hasta el ${range.twoDay}`,
@@ -107,14 +106,14 @@ function TemplateArticle() {
     /*Cuando createArticle sea true, entonces enfocamos el primer textarea*/
     useEffect(() => {
         function isFocusTextarea() {
-            if (!createArticle) return null
+            if (!createArticle || !refTitleNote?.current) return null
             refTitleNote.current.focus()
         }
 
         isFocusTextarea()
     }, [createArticle]);
 
-    function saveUpdates(e) {
+    function saveUpdates(e: React.FocusEvent<HTMLTextAreaElement>) {
 
         const {name, value} = e.target;
 
@@ -155,8 +154,12 @@ function TemplateArticle() {
         /*Nos traemos el contenedor del mes y dia en el que estamos, esos contienen los articulos*/
         const containerMonthDayCurrent = dataUserActive?.data.filter(article => article._id === idDocument)[0]
 
+        if (!articleActive || !containerMonthDayCurrent) return null
+
         /*Luego el articulo original equivalente al que esta en articleActive*/
-        const articleOriginal = containerMonthDayCurrent?.articles.filter(article => article.id === articleActive.id)[0]
+        const articleOriginal = containerMonthDayCurrent?.articles.find(article => article.id === articleActive.id);
+
+        if (!articleActive || !articleOriginal) return null
 
         /*Verificamos si title o content del articleActive es diferente al title o content del articulo original*/
         for (const [key, value] of Object.entries(articleActive)) {
@@ -171,7 +174,7 @@ function TemplateArticle() {
 
     /*Cuando hacemos cambios en cada input entonces tambien actualizamos los campos que se estan
     * cambiando pero en el state de articleActive*/
-    function controllerOnChange(e) {
+    function controllerOnChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
         const {name, value} = e.target;
         dispatch(setArticleActive({...articleActive, [name]: value}))
 
@@ -179,7 +182,8 @@ function TemplateArticle() {
 
     useEffect(() => {
         function scrollDown() {
-            if (!runGPT) return null
+            if (!runGPT || !textareaContentRef?.current) return null
+
             textareaContentRef.current.scrollTop = textareaContentRef.current.scrollHeight
         }
 

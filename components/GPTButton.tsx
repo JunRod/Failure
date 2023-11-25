@@ -2,17 +2,17 @@
 
 import Diary from "@styles/diary.module.css";
 import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setShowConfigGpt} from "@store/diarySlice.js";
+import {setShowConfigGpt} from "@redux/diarySlice";
 import {toast} from "sonner";
-import isLogin from "@components/isLogin.js";
+import isLogin from "@components/isLogin";
 import {useRouter} from 'next/navigation'
+import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
 
 function GptButton() {
 
-    const dispatch = useDispatch();
-    const {range} = useSelector(state => state.diary);
+    const dispatch = useAppDispatch();
+    const {range} = useAppSelector(state => state.diary);
     const [GPTActive, setGPTActive] = useState(false)
     const router = useRouter()
     const resultIsLogin = isLogin()

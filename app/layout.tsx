@@ -1,16 +1,17 @@
 import "@styles/globals.css"
-import {Inter} from 'next/font/google'
-import Providers from "@components/providers";
-import HocChildrenTransition from "@components/HOC-children-transition.js";
-import ToasterJs from "@components/ToasterJS.js";
+import Providers from "@redux/providers";
+import HocChildrenTransition from "@components/HOC-children-transition";
+import ToasterJs from "@components/ToasterJS";
 import {UserProvider} from '@auth0/nextjs-auth0/client';
-import ProfileClient from "@components/profileClient.js";
+import ProfileClient from "@components/profileClient";
 import {Suspense} from "react";
-import ButtonGeneradosOrDiario from "@components/buttonGeneradosOrDiario.js";
-import TemplateArticle from "@components/templateArticle.js";
+import ButtonGeneradosOrDiario from "@components/buttonGeneradosOrDiario";
+import TemplateArticle from "@components/templateArticle";
 import Diary from "@styles/diary.module.css";
 import {Analytics} from '@vercel/analytics/react';
 import {GeistSans} from "geist/font/sans";
+import {Props} from "@ts/types";
+
 
 const {SITE_NAME} = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -66,34 +67,35 @@ export const metadata = {
     },
 }
 
-export default function RootLayout({children}) {
+export default function RootLayout({children}: Props) {
 
-    return (<Providers>
-        <html lang="en" className={GeistSans.className}>
-        <UserProvider>
-            <body>
-            <ToasterJs/>
-            <header>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <ProfileClient/>
-                </Suspense>
-            </header>
-            <HocChildrenTransition>
-                <main>
+    return (
+        <Providers>
+            <html lang="en" className={GeistSans.className}>
+            <UserProvider>
+                <body>
+                <ToasterJs/>
+                <header>
                     <Suspense fallback={<div>Loading...</div>}>
-                        {children}
+                        <ProfileClient/>
                     </Suspense>
-                    <div className={Diary.containerArticle}>
-                        <TemplateArticle/>
-                    </div>
-                </main>
-                <footer>
-                    <ButtonGeneradosOrDiario/>
-                </footer>
-            </HocChildrenTransition>
-            <Analytics/>
-            </body>
-        </UserProvider>
-        </html>
-    </Providers>)
+                </header>
+                <HocChildrenTransition>
+                    <main>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            {children}
+                        </Suspense>
+                        <div className={Diary.containerArticle}>
+                            <TemplateArticle/>
+                        </div>
+                    </main>
+                    <footer>
+                        <ButtonGeneradosOrDiario/>
+                    </footer>
+                </HocChildrenTransition>
+                <Analytics/>
+                </body>
+            </UserProvider>
+            </html>
+        </Providers>)
 }

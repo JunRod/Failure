@@ -1,9 +1,9 @@
 import Diary from "@styles/diary.module.css";
-import GPTButton from "@components/GPTButton.js";
-import MonthOnHover from "@components/MonthOnHover.js";
-import IsDaysOrMonth from "@components/isDaysOrMonth.js";
-import GenerateArticles from "@components/generateArticles.js";
-import CreateArticle from "@components/createArticle.js";
+import GPTButton from "@components/GPTButton";
+import MonthOnHover from "@components/MonthOnHover";
+import IsDaysOrMonth from "@components/isDaysOrMonth";
+import GenerateArticles from "@components/generateArticles";
+import CreateArticle from "@components/createArticle";
 
 function Page() {
 

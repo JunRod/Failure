@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
-import {useDispatch} from "react-redux";
-import {addRange, setArticleActive, setOptionSelected, setRunGPT, setShowConfigGpt} from "@store/diarySlice.js";
-import isLogin from "@components/isLogin.js";
+import {addRange, setArticleActive, setOptionSelected, setRunGPT, setShowConfigGpt} from "@redux/diarySlice";
+import isLogin from "@components/isLogin";
+import {useAppDispatch} from "@redux/hooks";
 
 
 function ButtonGeneradosOrDiario() {
 
     const router = useRouter()
     const result = usePathname()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const resultIsLogin = isLogin()
 
     function controllerOnClick() {
