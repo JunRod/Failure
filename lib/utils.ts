@@ -4,8 +4,6 @@ export const mesesAbreviadosEnEspanol = [
 ];
 
 export function obtenerNombreMesEnEspanol() {
-
     const hoy = new Date();
     return mesesAbreviadosEnEspanol[hoy.getMonth()];
 }
-

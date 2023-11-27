@@ -4,7 +4,7 @@ import {NextResponse} from "next/server";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    baseURL: `https://api.mandrillai.tech/v1`,
+    baseURL: `https://zukijourney.xyzbot.net/v1`,
 });
 
 export async function POST(req: Request) {
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         const {prompt} = await req.json();
 
         const response = await openai.chat.completions.create({
-            model: 'gpt-4',
+            model: 'gpt-3.5-turbo',
             stream: true,
             messages: [
                 {

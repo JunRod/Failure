@@ -12,7 +12,6 @@ import {Analytics} from '@vercel/analytics/react';
 import {GeistSans} from "geist/font/sans";
 import {Props} from "@ts/types";
 
-
 const {SITE_NAME} = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -97,5 +96,6 @@ export default function RootLayout({children}: Props) {
                 </body>
             </UserProvider>
             </html>
-        </Providers>)
+        </Providers>
+    )
 }

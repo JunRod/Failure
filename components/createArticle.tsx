@@ -20,7 +20,6 @@ function CreateArticle() {
     const router = useRouter()
     const resultIsLogin = isLogin()
 
-
     function controllerCreateArticle() {
         /*Verificar que este logeado*/
         if (!resultIsLogin) return router.push('/api/auth/login')

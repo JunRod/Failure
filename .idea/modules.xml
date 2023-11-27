@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../war-mode.iml" filepath="$PROJECT_DIR$/../war-mode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ToFailure.iml" filepath="$PROJECT_DIR$/ToFailure.iml" />
     </modules>
   </component>
 </project>
