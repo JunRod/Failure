@@ -44,7 +44,7 @@ function GenerateChats() {
             if (!dataUserActive) return null
 
             const {chats} = dataUserActive
-            setGeneratesState(chats.length > 0 ? [...chats].reverse() : chats)
+            setGeneratesState(chats?.length > 0 ? [...chats]?.reverse() : chats)
         }
 
         getGenerates()
@@ -59,7 +59,7 @@ function GenerateChats() {
         function getRange() {
             if (range) return null
 
-            const numerosExtraidos = chatData.id.match(/\d+/g);
+            const numerosExtraidos = chatData?.id?.match(/\d+/g);
             if (numerosExtraidos) dispatch(addRange({
                 today: parseInt(numerosExtraidos[0]),
                 twoDay: parseInt(numerosExtraidos[1])
@@ -70,7 +70,7 @@ function GenerateChats() {
 
     }, [chatData]);
 
-    if (chatsState.length === 0) return (
+    if (chatsState?.length === 0) return (
         <h1 className='text-center text-white'>Ups! No se encontraron chats.</h1>
     )
 
