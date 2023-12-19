@@ -10,6 +10,7 @@ const openai = new OpenAI({
 export const runtime = 'edge'
 
 export async function POST(req: Request) {
+    console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY)
 
     try {
         const {prompt} = await req.json();
