@@ -3,14 +3,12 @@ import {OpenAIStream, StreamingTextResponse} from 'ai';
 import {NextResponse} from "next/server";
 
 const openai = new OpenAI({
-    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
     baseURL: `https://api.mandrillai.tech/v1`,
 });
-
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 export async function POST(req: Request) {
-    console.log(process.env.NEXT_PUBLIC_OPENAI_API_KEY)
 
     try {
         const {prompt} = await req.json();
