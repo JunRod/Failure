@@ -1,6 +1,5 @@
 'use client'
 
-import Diary from "@styles/diary.module.css";
 import {memo} from "react";
 import {toast} from "sonner";
 
@@ -16,10 +15,11 @@ const SaveButton = memo(function SaveButton({setSaveGenerate, showButtonSave}: P
         toast.success('Generación guardada')
     }
 
+    /*className={`${Diary.buttonSave} ${showButtonSave ? Diary.saveButtonActive : Diary.saveButtonOff}`}*/
     return (
         <button
             onClick={controllerOnClick}
-            className={`${Diary.buttonSave} ${showButtonSave ? Diary.saveButtonActive : Diary.saveButtonOff}`}
+
             disabled={!showButtonSave}
         >
             Guardar generación

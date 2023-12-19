@@ -4,10 +4,13 @@ import {NextResponse} from "next/server";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
-    baseURL: `https://zukijourney.xyzbot.net/v1`,
+    baseURL: `https://api.mandrillai.tech/v1`,
 });
 
+export const runtime = 'edge'
+
 export async function POST(req: Request) {
+
     try {
         const {prompt} = await req.json();
 
@@ -23,7 +26,6 @@ export async function POST(req: Request) {
         });
 
         const stream = OpenAIStream(response);
-
         return new StreamingTextResponse(stream);
     } catch (error) {
         console.error(error);
@@ -35,3 +37,8 @@ export async function POST(req: Request) {
         }
     }
 }
+
+function convertBlobUrlToFile(blobUrl: string, filename: string, mimeType: string) {
+
+}
+

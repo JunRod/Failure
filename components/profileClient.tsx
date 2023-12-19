@@ -16,8 +16,8 @@ async function ProfileClient() {
     return user && (
         <>
             <section>
-                <img src={user.picture} alt={user.name}/>
-                <h2>{user.given_name}</h2>
+                <img className='border-[1px] border-white' src={user.picture} alt={user.name}/>
+                <span className='text-lg'>{user.given_name}</span>
             </section>
             <Logout email={email}/>
         </>

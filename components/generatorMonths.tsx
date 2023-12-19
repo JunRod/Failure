@@ -1,7 +1,6 @@
 'use client'
 
 import {mesesAbreviadosEnEspanol} from "@lib/utils";
-import Diary from "@styles/diary.module.css";
 import {setArticleActive, setMonthSelected} from "@redux/diarySlice";
 import {useEffect, useRef} from "react";
 import isLogin from "@components/isLogin";
@@ -27,7 +26,7 @@ function GeneratorMonths() {
 
     }, []);
 
-    function OnClick(mes: string) {
+    function onClick(mes: string) {
         /*Verificar que este logeado*/
         if (!resultIsLogin) return router.push('/api/auth/login')
 
@@ -35,18 +34,24 @@ function GeneratorMonths() {
         dispatch(setArticleActive(null))
     }
 
-    return (mesesAbreviadosEnEspanol.map(mes => (
+    /*className={`${Diary.day} ${mes === MonthSelected ? Diary.monthActive : ''}`}*/
+    return mesesAbreviadosEnEspanol.map(mes => (
+        <div
+            onClick={() => onClick(mes)}
+            key={mes}
+        >
             <p
-                key={mes}
+                className={` ${MonthSelected === mes && 'bg-[#6C757D] hover:bg-[#6C757D]' +
+                ' after:bg-[#6C757D]' +
+                ' before:from-[#ADB5BD]' +
+                ' before:to-transparent'} after:h-[97%] after:w-[97%] after:z-8 after:rounded-full after:absolute after:bg-[#343A40] before:bg-gradient-to-b before:from-[#495057] before:to-transparent before:absolute before:h-full before:w-full before:z-2 before:rounded-full text-white rounded-full justify-center flex flex-col items-center relative h-full min-w-[50px] bg-[#343A40] text-xl z-2`}
                 ref={mes === MonthSelected ? currentMonth : null}
-                className={`${Diary.day} ${mes === MonthSelected ? Diary.monthActive : ''}`}
-                onClick={() => OnClick(mes)}
             >
-                {mes.charAt(0).toUpperCase() + mes.slice(1)}
+                <span className='z-10'>{mes.charAt(0).toUpperCase() + mes.slice(1)}</span>
             </p>
-        )
-    ));
-}
+        </div>
 
+    ))
+}
 
 export default GeneratorMonths;

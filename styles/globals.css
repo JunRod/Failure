@@ -1,4 +1,12 @@
-html {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+/*html {
     box-sizing: border-box;
     display: flex;
     justify-content: flex-start;
@@ -6,11 +14,10 @@ html {
     align-items: center;
     height: 100%;
     scroll-behavior: smooth;
-}
+}*/
 
-*, *:before, *:after {
-    box-sizing: inherit;
-}
+
+/*
 
 body {
     margin: 0;
@@ -20,7 +27,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     display: flex;
-    height: 93vh;
+    height: 94vh;
     width: 1300px;
     gap: 10px;
     position: relative;
@@ -90,3 +97,4 @@ footer a:hover:after {
 .toaster {
     position: absolute;
 }
+*/

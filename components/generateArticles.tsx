@@ -1,11 +1,10 @@
 'use client'
 
-import Diary from "@styles/diary.module.css";
 import {
-    addRange, Article, ArticleActive, deleteArticle,
-    setArticleActive,
-    setIdDocument, setOptionSelected,
-    setRunGPT, setShowConfigGpt
+    Article, ArticleActive, deleteArticle,
+    setArticleActive, setCreateArticle,
+    setIdDocument,
+    setShowChatGPT
 } from "@redux/diarySlice";
 import {useEffect, useState} from "react";
 import {toast} from "sonner";
@@ -21,16 +20,18 @@ function GenerateArticles() {
         dataUserActive,
         daySelected,
         MonthSelected,
-        idDocument
+        idDocument,
+        isLoadingGPT,
+        createArticle,
+        showChatGPT
     } = useAppSelector(state => state.diary)
 
 
-    function articleSelected(article: ArticleActive) {
+    function onClick(article: ArticleActive) {
+        if (isLoadingGPT) return null
 
-        dispatch(addRange(null))
-        dispatch(setRunGPT(false));
-        dispatch(setShowConfigGpt(false));
-        dispatch(setOptionSelected(null));
+        if (createArticle) dispatch(setCreateArticle(false))
+        if (showChatGPT) dispatch(setShowChatGPT(false))
         dispatch(setArticleActive(article));
     }
 
@@ -38,9 +39,7 @@ function GenerateArticles() {
         setIndexDelete(id)
         dispatch(deleteArticle(id))
         /*Verificar si el articulo que estamos borrando se encuentra en article active para tambien borrarlo de ahi*/
-        if (id === articleActive?.id) {
-            dispatch(setArticleActive(null))
-        }
+        if (id === articleActive?.id) dispatch(setArticleActive(null))
 
         const titleToast = titleNote.length > 20 ? `${titleNote.slice(0, 20)}...` : titleNote
         toast.success(`Articulo eliminado: ${titleToast} `)
@@ -83,7 +82,7 @@ function GenerateArticles() {
     }, [dataUserActive, daySelected, MonthSelected]);
 
 
-    if (articles.length === 0) return (<h1 className={`${Diary.notFound}`}>Ups! No se encontraron articulos</h1>)
+    if (articles.length === 0) return (<h1 className='text-white text-center'>Ups! No se encontraron articulos</h1>)
 
     return articles?.map(article => {
 
@@ -94,19 +93,20 @@ function GenerateArticles() {
 
         return (
             <div
-                onClick={() => articleSelected(article)}
+                onClick={() => onClick(article)}
                 key={id}
-                className={`${Diary.article} ${isArticleActive ? Diary.articleActive : ''}`}
+                className={`${isArticleActive && 'bg-[#6C757D] border-[1px] border-[#6C757D]'} group relative flex flex-col gap-2 p-2 rounded-[10px] bg-[#343A40] border-[1px] border-[#495057] min-h-[90px] text-white`}
             >
-                <div className={Diary.containerTitleDelete}>
-                    <h1 className={Diary.title}>{titleNote}</h1>
+                <div className='flex flex-row justify-between items-center relative w-full'>
+                    <h1 className='font-medium relative max-h-[50px] w-[90%] overflow-y-auto break-words'>{titleNote ? titleNote : 'Sin' +
+                        ' titulo'}</h1>
                     <svg
                         onClick={(e) => {
                             e.stopPropagation()
                             controllerDelete(id, titleNote)
                         }}
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`${Diary.delete} icon icon-tabler icon-tabler-trash-filled ${indexDelete === id ? Diary.deleteActive : ''}`}
+                        className={`hidden group-hover:flex icon icon-tabler icon-tabler-trash-filled `}
                         width="22" height="22" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
                         fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -118,7 +118,7 @@ function GenerateArticles() {
                             strokeWidth="0" fill="currentColor"></path>
                     </svg>
                 </div>
-                <p>{content}</p>
+                <p className='flex-1 font-normal overflow-hidden line-clamp-3'>{content ? content : '...'}</p>
             </div>
         )
     })

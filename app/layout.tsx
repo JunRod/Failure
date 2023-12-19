@@ -1,16 +1,13 @@
 import "@styles/globals.css"
 import Providers from "@redux/providers";
-import HocChildrenTransition from "@components/HOC-children-transition";
 import ToasterJs from "@components/ToasterJS";
 import {UserProvider} from '@auth0/nextjs-auth0/client';
 import ProfileClient from "@components/profileClient";
 import {Suspense} from "react";
-import ButtonGeneradosOrDiario from "@components/buttonGeneradosOrDiario";
-import TemplateArticle from "@components/templateArticle";
-import Diary from "@styles/diary.module.css";
+import ButtonChatsOrDiario from "@components/buttonChatsOrDiario";
 import {Analytics} from '@vercel/analytics/react';
 import {GeistSans} from "geist/font/sans";
-import {Props} from "@ts/types";
+import HocChatGptTemplateActive from "@components/HOC-ChatGPT-TemplateActive";
 
 const {SITE_NAME} = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -20,10 +17,7 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
 export const metadata = {
     description: 'ToFailure: Diario con IA',
     metadataBase: new URL(baseUrl),
-    title: {
-        default: SITE_NAME,
-        template: `%s | ${SITE_NAME}`
-    },
+    title: SITE_NAME,
     robots: {
         follow: true,
         index: true
@@ -40,13 +34,11 @@ export const metadata = {
             alt: 'Frame ToFailure',
         },
     },
-
     icons: {
         icon: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
         shortcut: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
         apple: 'https://res.cloudinary.com/dabwdkdys/image/upload/v1699993735/Frame_14favicon_ve7mbh.png',
     },
-
     openGraph: {
         title: 'ToFailure: Diario con IA',
         description: 'Un clic, Infinitas Posibilidades. Tu historia, impulsada por la inteligencia artificial.',
@@ -66,36 +58,34 @@ export const metadata = {
     },
 }
 
-export default function RootLayout({children}: Props) {
+export default function RootLayout({children}: { children: React.ReactNode }) {
 
     return (
+        <html lang="en">
         <Providers>
-            <html lang="en" className={GeistSans.className}>
             <UserProvider>
-                <body>
+                <body
+                    className={`${GeistSans.className} p-4 bg-[#212529] flex flex-col justify-between relative max-w-full`}>
                 <ToasterJs/>
-                <header>
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <ProfileClient/>
-                    </Suspense>
+                <header className='text-white flex flex-row justify-between items-center relative'>
+                    <ProfileClient/>
                 </header>
-                <HocChildrenTransition>
-                    <main>
-                        <Suspense fallback={<div>Loading...</div>}>
-                            {children}
-                        </Suspense>
-                        <div className={Diary.containerArticle}>
-                            <TemplateArticle/>
-                        </div>
-                    </main>
-                    <footer>
-                        <ButtonGeneradosOrDiario/>
-                    </footer>
-                </HocChildrenTransition>
+                <main className='max-h-auto max-w-full flex flex-col relative gap-3 my-2.5'>
+                    {children}
+                    <div className='h-[1px] w-full bg-[#343A40]'></div>
+                    <div
+                        className=' px-10 py-5 min-h-[200px] max-h-auto rounded-[10px] text-white border-[1px] border-[#495057] relative bg-[#343A40] max-w-full'
+                    >
+                        <HocChatGptTemplateActive/>
+                    </div>
+                </main>
+                <footer className='text-white self-end'>
+                    <ButtonChatsOrDiario/>
+                </footer>
                 <Analytics/>
                 </body>
             </UserProvider>
-            </html>
         </Providers>
+        </html>
     )
 }

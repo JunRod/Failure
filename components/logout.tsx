@@ -3,7 +3,6 @@
 import {memo, useEffect, useState} from "react";
 import {realmApp} from "@realm-web/realmApp";
 import {setDataUserActive} from "@redux/diarySlice";
-import Diary from "@styles/diary.module.css";
 import {useAppDispatch, useAppSelector} from "@redux/hooks";
 
 const Logout = memo(function Logout({email}: { email: string }) {
@@ -19,7 +18,7 @@ const Logout = memo(function Logout({email}: { email: string }) {
         await appSessionRealm.functions.replaceDataUser(dataUserActive)
     }
 
-    async function GetAppSessionRealm() {
+    async function getAppSessionRealm() {
         if (dataUserActive) return null
         if (appSessionRealm) return null
         const app = await realmApp()
@@ -39,6 +38,8 @@ const Logout = memo(function Logout({email}: { email: string }) {
         updateDataUserActive()
     }, [dataUserActive]);
 
+    //TODO arreglar: tenemos muchas sesiones inciadas en mongo realm en ls
+
     useEffect(() => {
         function getLocalStorage() {
             const resultLocalStorage = JSON.parse(localStorage.getItem(email) ?? 'null')
@@ -50,7 +51,7 @@ const Logout = memo(function Logout({email}: { email: string }) {
             *  dataUserActive a mongodb, de tal manera que si el usuario borra el localSotrage, podamos recuperar
             * los datos de mongodb.
             * */
-            GetAppSessionRealm()
+            getAppSessionRealm()
         }
 
         getLocalStorage()
@@ -74,12 +75,13 @@ const Logout = memo(function Logout({email}: { email: string }) {
     }, [appSessionRealm]);
 
 
+    /*className={Diary.auth0Link}*/
     return (
         <a
-            className={Diary.auth0Link}
             onClick={controllerSaveDataUserActiveInMongoDB}
             href={"/api/auth/logout"}
-        >Logout</a>
+            className='text-lg'
+        >Salir</a>
     );
 })
 

@@ -5,11 +5,9 @@ import GeneratorMonths from "@components/generatorMonths";
 import {useAppSelector} from "@redux/hooks";
 
 function IsDaysOrMonth() {
-    const {onMonth, onMonthDayText} = useAppSelector(state => state.diary)
+    const {onMonth} = useAppSelector(state => state.diary)
 
-    return (
-        (onMonth && onMonthDayText) ? <GeneratorMonths/> : <GeneratorDays/>
-    )
+    return onMonth ? <GeneratorMonths/> : <GeneratorDays/>
 }
 
 export default IsDaysOrMonth;

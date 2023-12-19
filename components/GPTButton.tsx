@@ -1,52 +1,54 @@
 "use client"
 
-import Diary from "@styles/diary.module.css";
 import {useEffect, useState} from "react";
-import {setShowConfigGpt} from "@redux/diarySlice";
 import {toast} from "sonner";
 import isLogin from "@components/isLogin";
 import {useRouter} from 'next/navigation'
 import {useAppDispatch, useAppSelector} from "@redux/hooks";
-
+import {setArticleActive, setShowChatGPT} from "@redux/diarySlice";
 
 function GptButton() {
 
     const dispatch = useAppDispatch();
-    const {range} = useAppSelector(state => state.diary);
-    const [GPTActive, setGPTActive] = useState(false)
+    const {range, showChatGPT} = useAppSelector(state => state.diary);
+    const [rangeSelected, setRangeSelected] = useState(false)
     const router = useRouter()
     const resultIsLogin = isLogin()
 
-    async function VerifyEverything() {
+    async function onClick() {
         /*Verificar que este logeado*/
         if (!resultIsLogin) return router.push('/api/auth/login')
 
         if (!range) return toast.error('Debe seleccionar un rango de dias')
 
-        dispatch(setShowConfigGpt(true))
+        dispatch(setShowChatGPT(!showChatGPT))
+        dispatch(setArticleActive(null))
     }
 
     useEffect(() => {
+        if (!range) dispatch(setShowChatGPT(false))
+    }, [showChatGPT]);
+
+    useEffect(() => {
         /*Cambiamos el color del icono de GPT para dar a entender
-        * que esta listo para ejecutar*/
+        * que esta listo para mostrar el ChatGPT*/
         if (range) {
-            setGPTActive(true)
+            setRangeSelected(true)
         }
 
     }, [range]);
 
-
     return (
-        <svg
-            onClick={() => VerifyEverything()}
-            className={`${Diary.svg} ${GPTActive ? Diary.svgActive : ""}`}
-            viewBox="0 0 512 512">
-            <rect width="512" height="512" rx="104.187" ry="105.042"/>
-            <path fill="#fff"
-                  d="M378.68 230.011a71.432 71.432 0 003.654-22.541 71.383 71.383 0 00-9.783-36.064c-12.871-22.404-36.747-36.236-62.587-36.236a72.31 72.31 0 00-15.145 1.604 71.362 71.362 0 00-53.37-23.991h-.453l-.17.001c-31.297 0-59.052 20.195-68.673 49.967a71.372 71.372 0 00-47.709 34.618 72.224 72.224 0 00-9.755 36.226 72.204 72.204 0 0018.628 48.395 71.395 71.395 0 00-3.655 22.541 71.388 71.388 0 009.783 36.064 72.187 72.187 0 0077.728 34.631 71.375 71.375 0 0053.374 23.992H271l.184-.001c31.314 0 59.06-20.196 68.681-49.995a71.384 71.384 0 0047.71-34.619 72.107 72.107 0 009.736-36.194 72.201 72.201 0 00-18.628-48.394l-.003-.004zM271.018 380.492h-.074a53.576 53.576 0 01-34.287-12.423 44.928 44.928 0 001.694-.96l57.032-32.943a9.278 9.278 0 004.688-8.06v-80.459l24.106 13.919a.859.859 0 01.469.661v66.586c-.033 29.604-24.022 53.619-53.628 53.679zm-115.329-49.257a53.563 53.563 0 01-7.196-26.798c0-3.069.268-6.146.79-9.17.424.254 1.164.706 1.695 1.011l57.032 32.943a9.289 9.289 0 009.37-.002l69.63-40.205v27.839l.001.048a.864.864 0 01-.345.691l-57.654 33.288a53.791 53.791 0 01-26.817 7.17 53.746 53.746 0 01-46.506-26.818v.003zm-15.004-124.506a53.5 53.5 0 0127.941-23.534c0 .491-.028 1.361-.028 1.965v65.887l-.001.054a9.27 9.27 0 004.681 8.053l69.63 40.199-24.105 13.919a.864.864 0 01-.813.074l-57.66-33.316a53.746 53.746 0 01-26.805-46.5 53.787 53.787 0 017.163-26.798l-.003-.003zm198.055 46.089l-69.63-40.204 24.106-13.914a.863.863 0 01.813-.074l57.659 33.288a53.71 53.71 0 0126.835 46.491c0 22.489-14.033 42.612-35.133 50.379v-67.857c.003-.025.003-.051.003-.076a9.265 9.265 0 00-4.653-8.033zm23.993-36.111a81.919 81.919 0 00-1.694-1.01l-57.032-32.944a9.31 9.31 0 00-4.684-1.266 9.31 9.31 0 00-4.684 1.266l-69.631 40.205v-27.839l-.001-.048c0-.272.129-.528.346-.691l57.654-33.26a53.696 53.696 0 0126.816-7.177c29.644 0 53.684 24.04 53.684 53.684a53.91 53.91 0 01-.774 9.077v.003zm-150.831 49.618l-24.111-13.919a.859.859 0 01-.469-.661v-66.587c.013-29.628 24.053-53.648 53.684-53.648a53.719 53.719 0 0134.349 12.426c-.434.237-1.191.655-1.694.96l-57.032 32.943a9.272 9.272 0 00-4.687 8.057v.053l-.04 80.376zm13.095-28.233l31.012-17.912 31.012 17.9v35.812l-31.012 17.901-31.012-17.901v-35.8z"/>
-        </svg>
-    );
-
+        <div onClick={onClick}
+             className={`${showChatGPT && '!bg-white'} ${rangeSelected && 'bg-black'} rounded-[10px] relative h-full min-w-[50px] bg-[#343A40] flex flex-col items-center`}>
+            <svg className='relative h-full p-2' role="img" xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24">
+                <path
+                    className={`${showChatGPT && '!fill-black'} ${rangeSelected && 'fill-[#13C79B]'} relative h-full w-full fill-white`}
+                    d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
+            </svg>
+        </div>
+    )
 }
 
 export default GptButton;

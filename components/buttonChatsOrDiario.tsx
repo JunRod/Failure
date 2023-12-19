@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
-import {addRange, setArticleActive, setOptionSelected, setRunGPT, setShowConfigGpt} from "@redux/diarySlice";
+import {setArticleActive} from "@redux/diarySlice";
 import isLogin from "@components/isLogin";
 import {useAppDispatch} from "@redux/hooks";
 
 
-function ButtonGeneradosOrDiario() {
+function ButtonChatsOrDiario() {
 
     const router = useRouter()
     const result = usePathname()
@@ -18,23 +18,18 @@ function ButtonGeneradosOrDiario() {
         /*Verificar que este logeado*/
 
         if (!resultIsLogin) return router.push('/api/auth/login')
-
-        dispatch(setRunGPT(false))
-        dispatch(setShowConfigGpt(false))
-        dispatch(setOptionSelected(null))
-        dispatch(addRange(null))
         dispatch(setArticleActive(null))
     }
 
     return (
         <Link
             onClick={controllerOnClick}
-            href={result === '/' ? '/generates' : '/'}
+            href={result === '/' ? '/chats' : '/'}
             prefetch={false}
         >
-            {result === '/' ? 'Generados' : 'Diario'}
+            {result === '/' ? 'Chats' : 'Diario'}
         </Link>
     );
 }
 
-export default ButtonGeneradosOrDiario;
+export default ButtonChatsOrDiario;

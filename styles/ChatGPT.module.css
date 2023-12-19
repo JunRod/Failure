@@ -1,0 +1,23 @@
+.title {
+    margin: 0;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.buttonGPT {
+    width: 50px !important;
+    border-radius: 400px !important;
+}
+
+.containerBlockTwo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
