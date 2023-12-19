@@ -37,8 +37,3 @@ export async function POST(req: Request) {
         }
     }
 }
-
-function convertBlobUrlToFile(blobUrl: string, filename: string, mimeType: string) {
-
-}
-

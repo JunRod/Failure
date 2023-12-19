@@ -25,7 +25,7 @@ function OptionsChatGpt({optionSelected}: { optionSelected: (option: string) => 
                         className='
                         animate-bounce-short
                          h-[50%] flex flex-col justify-center  border-[#6C757D] p-[6px] border-[1px] rounded-[10px] max-w-full cursor-pointer bg-[#343A40]'
-                        onClick={() => optionSelected(optionGroup)}
+                        onClick={() => optionSelected(optionGroup + ' ' + options[optionGroup])}
                     >
                         <span className='font-medium'>{optionGroup}</span>
                         <span className='text-[#ADB5BD]'>{options[optionGroup]}</span>
