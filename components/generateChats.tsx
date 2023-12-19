@@ -44,7 +44,7 @@ function GenerateChats() {
             if (!dataUserActive) return null
 
             const {chats} = dataUserActive
-            setGeneratesState([...chats].reverse())
+            setGeneratesState(chats.length > 0 ? [...chats].reverse() : chats)
         }
 
         getGenerates()
