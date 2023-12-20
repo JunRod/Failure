@@ -107,8 +107,8 @@ function ChatGpt() {
             const idCurrentChat = `${today}-${twoDay}-${MonthSelected}`
             const idCurrentReverse = `${twoDay}-${today}-${MonthSelected}`
 
-            const result = dataUserActive?.chats.find(
-                (chat) => chat.id === idCurrentChat || chat.id === idCurrentReverse
+            const result = dataUserActive?.chats?.find(
+                (chat) => chat?.id === idCurrentChat || chat?.id === idCurrentReverse
             )
 
             if (result) {
@@ -132,7 +132,7 @@ function ChatGpt() {
     useEffect(() => {
         function scrollDown() {
             if (!divRef?.current) return null
-            divRef.current.scrollTop = divRef.current.scrollHeight
+            divRef?.current?.scrollTop = divRef?.current?.scrollHeight
         }
 
         scrollDown()
@@ -141,8 +141,8 @@ function ChatGpt() {
     useEffect(() => {
         const textArea = textAreaRef?.current;
         if (textArea) {
-            textArea.style.height = 'auto';
-            textArea.style.height = textArea.scrollHeight - 40 + 'px';
+            textArea?.style?.height = 'auto';
+            textArea?.style?.height = textArea?.scrollHeight - 40 + 'px';
         }
     }, [textArea]);
 
@@ -154,11 +154,11 @@ function ChatGpt() {
             </div>
             <h1 className='text-center text-[#656D75] font-light text-sm'>{createTitle()}</h1>
             {
-                chatData.chat.length > 0 ?
+                chatData?.chat?.length > 0 ?
                     (<div ref={divRef}
                           className='lg:h-full lg:scrollbar-thumb-[#495057] lg:scrollbar-thumb-rounded-full lg:scrollbar lg:scrollbar-w-[6px] flex flex-col my-6 max-h-[600px] overflow-y-auto gap-5'>
                         {
-                            chatData.chat.map((chat, index) => (
+                            chatData?.chat?.map((chat, index) => (
                                     <section key={index}
                                              className='last:border-0 flex flex-col gap-5 border-b-[1px] border-[#495057] pb-5'>
                                         <div className=' self-start flex flex-row gap-2'>

@@ -70,7 +70,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                     <ProfileClient/>
                 </header>
                 <main
-                    className='overflow-hidden max-lg:max-h-auto max-w-full flex flex-col relative gap-3 lg:flex-row lg:max-h-[82%]'>
+                    className='overflow-hidden max-lg:max-h-auto max-w-full flex flex-col relative gap-3 lg:flex-row lg:max-h-[82%] lg:h-[82%]'>
                     {children}
                     <div className='h-[1px] w-full bg-[#343A40] lg:hidden'></div>
                     <div
