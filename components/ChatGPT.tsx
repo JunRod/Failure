@@ -132,7 +132,7 @@ function ChatGpt() {
     useEffect(() => {
         function scrollDown() {
             if (!divRef?.current) return null
-            divRef?.current?.scrollTop = divRef?.current?.scrollHeight
+            divRef.current.scrollTop = divRef.current.scrollHeight
         }
 
         scrollDown()
@@ -141,8 +141,8 @@ function ChatGpt() {
     useEffect(() => {
         const textArea = textAreaRef?.current;
         if (textArea) {
-            textArea?.style?.height = 'auto';
-            textArea?.style?.height = textArea?.scrollHeight - 40 + 'px';
+            textArea.style.height = 'auto';
+            textArea.style.height = textArea.scrollHeight - 40 + 'px';
         }
     }, [textArea]);
 
