@@ -40,7 +40,7 @@ function GptButton() {
 
     return (
         <div onClick={onClick}
-             className={`${showChatGPT && '!bg-white'} ${rangeSelected && 'bg-black'} rounded-[10px] relative h-full min-w-[50px] bg-[#343A40] flex flex-col items-center`}>
+             className={`${showChatGPT && '!bg-white'} ${rangeSelected && 'bg-black'} lg:min-h-[50px]  ease-in duration-200 transition-all tr cursor-pointer rounded-[10px] relative h-full max-w-[50px] bg-[#343A40] flex flex-col items-center lg:max-h-[50px]`}>
             <svg className='relative h-full p-2' role="img" xmlns="http://www.w3.org/2000/svg"
                  viewBox="0 0 24 24">
                 <path

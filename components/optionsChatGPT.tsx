@@ -17,17 +17,17 @@ function OptionsChatGpt({optionSelected}: { optionSelected: (option: string) => 
 
     return (
         <section
-            className='items-stretch mb-6 max-w-full px-9 flex flex-row gap-2 justify-center'>
+            className='text-sm leading-4 font-light items-stretch mb-6 max-w-full px-9 flex flex-row gap-2 justify-center'>
             <div className='justify-between flex flex-col w-[50%] gap-2'>
                 {leftOptions.map((optionGroup, groupIndex) => (
                     <article
                         key={groupIndex}
                         className='
-                        animate-bounce-short
+                        hover:bg-[#6C757D]/25
                          h-[50%] flex flex-col justify-center  border-[#6C757D] p-[6px] border-[1px] rounded-[10px] max-w-full cursor-pointer bg-[#343A40]'
                         onClick={() => optionSelected(optionGroup + ' ' + options[optionGroup])}
                     >
-                        <span className='font-medium'>{optionGroup}</span>
+                        <span>{optionGroup}</span>
                         <span className='text-[#ADB5BD]'>{options[optionGroup]}</span>
                     </article>
                 ))}
@@ -36,10 +36,10 @@ function OptionsChatGpt({optionSelected}: { optionSelected: (option: string) => 
                 {rightOptions.map((optionGroup, groupIndex) => (
                     <article
                         key={groupIndex}
-                        className='h-[50%] flex flex-col justify-center border-[#6C757D] p-[6px] border-[1px] rounded-[10px] max-w-full cursor-pointer bg-[#343A40]'
+                        className='hover:bg-[#6C757D]/25 h-[50%] flex flex-col justify-center border-[#6C757D] p-[6px] border-[1px] rounded-[10px] max-w-full cursor-pointer bg-[#343A40]'
                         onClick={() => optionSelected(optionGroup + ' ' + options[optionGroup])}
                     >
-                        <span className='font-medium'>{optionGroup}</span>
+                        <span>{optionGroup}</span>
                         <span className='text-[#ADB5BD]'>{options[optionGroup]}</span>
                     </article>
                 ))}

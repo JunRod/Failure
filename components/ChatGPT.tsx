@@ -9,6 +9,7 @@ import {useRouter} from "next/navigation";
 import LogoGPT from "@components/logoGPT";
 import OptionsChatGPT from "@components/optionsChatGPT";
 import {useUser} from "@auth0/nextjs-auth0/client";
+import Image from "next/image";
 
 function ChatGpt() {
 
@@ -146,22 +147,27 @@ function ChatGpt() {
     }, [textArea]);
 
     return (
-        <div className='relative h-full flex flex-col'>
+        <div className='relative flex flex-col h-full'>
             <div
                 className='mb-3 w-full flex justify-end bg-gradient-to-b from-[#ADB5BD] font-medium from-30% to-80% to-transparent bg-clip-text text-transparent'>
                 GPT 4 Turbo
             </div>
-            <h1 className='text-center text-[#656D75]'>{createTitle()}</h1>
+            <h1 className='text-center text-[#656D75] font-light text-sm'>{createTitle()}</h1>
             {
                 chatData.chat.length > 0 ?
-                    (<div ref={divRef} className=' flex flex-col my-6 max-h-[600px] overflow-y-auto gap-5'>
+                    (<div ref={divRef}
+                          className='lg:h-full lg:scrollbar-thumb-[#495057] lg:scrollbar-thumb-rounded-full lg:scrollbar lg:scrollbar-w-[6px] flex flex-col my-6 max-h-[600px] overflow-y-auto gap-5'>
                         {
                             chatData.chat.map((chat, index) => (
                                     <section key={index}
                                              className='last:border-0 flex flex-col gap-5 border-b-[1px] border-[#495057] pb-5'>
-                                        <div className='self-start flex flex-row gap-1'>
-                                            <img className={`h-full w-[20px] relative flex rounded-full bg-white`}
-                                                 src={user?.picture ?? ''} alt="image"/>
+                                        <div className=' self-start flex flex-row gap-2'>
+                                            <Image
+                                                width={13}
+                                                height={3}
+                                                className={`h-[20px] w-[20px] relative flex rounded-full bg-white`}
+                                                src={user?.picture ?? ''} alt="image"
+                                            />
                                             <div>
                                                 <span className='font-semibold'>Tu</span>
                                                 <h2>{chat.prompt}</h2>
@@ -202,19 +208,20 @@ function ChatGpt() {
                         }
                     </div>)
                     : (
-                        <>
-                            <div className='mt-[50px] mb-[120px] flex flex-col justify-center items-center'>
+                        <div className='max-h-full relative lg:h-full'>
+                            <div
+                                className=' mt-[50px] mb-[120px] lg:mb-[75px] flex flex-col justify-center items-center'>
                                 <LogoGPT/>
                                 <h2 className='font-semibold'>¿Cómo puedo ayudarte hoy?</h2>
                             </div>
                             <OptionsChatGPT optionSelected={optionSelected}/>
-                        </>
+                        </div>
                     )
             }
-            <div className='relative w-full flex flex-row'>
+            <div className='relative w-full flex flex-row '>
                 <textarea
                     ref={textAreaRef ?? null}
-                    className='z-20 max-h-[130px] placeholder:text-[#fff] placeholder:opacity-40 placeholder:font-light p-2 pr-10 focus:outline-0 flex flex-col justify-center resize-none border-[1px] focus:border-[#ACACAC] border-[#8D9094FF] rounded-[10px] bg-transparent w-full relative'
+                    className='z-20 max-h-[130px] placeholder:font-light placeholder:text-[#fff] placeholder:opacity-40  p-2 pr-10 focus:outline-0 flex flex-col justify-center resize-none border-[1px] focus:border-[#ACACAC] border-[#8D9094FF] rounded-[10px] bg-transparent w-full relative'
                     wrap='hard'
                     placeholder={'Mensaje a' +
                         ' ChatGPT'}

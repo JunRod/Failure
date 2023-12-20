@@ -3,7 +3,6 @@ import Providers from "@redux/providers";
 import ToasterJs from "@components/ToasterJS";
 import {UserProvider} from '@auth0/nextjs-auth0/client';
 import ProfileClient from "@components/profileClient";
-import {Suspense} from "react";
 import ButtonChatsOrDiario from "@components/buttonChatsOrDiario";
 import {Analytics} from '@vercel/analytics/react';
 import {GeistSans} from "geist/font/sans";
@@ -65,21 +64,21 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
         <Providers>
             <UserProvider>
                 <body
-                    className={`${GeistSans.className} p-4 bg-[#212529] flex flex-col justify-between relative max-w-full`}>
+                    className={`${GeistSans.className}  bg-[#212529] flex flex-col relative max-w-full px-4 lg:h-screen gap-3`}>
                 <ToasterJs/>
                 <header className='text-white flex flex-row justify-between items-center relative'>
                     <ProfileClient/>
                 </header>
-                <main className='max-h-auto max-w-full flex flex-col relative gap-3 my-2.5'>
+                <main
+                    className='overflow-hidden max-lg:max-h-auto max-w-full flex flex-col relative gap-3 lg:flex-row lg:max-h-[82%]'>
                     {children}
-                    <div className='h-[1px] w-full bg-[#343A40]'></div>
+                    <div className='h-[1px] w-full bg-[#343A40] lg:hidden'></div>
                     <div
-                        className=' px-10 py-5 min-h-[200px] max-h-auto rounded-[10px] text-white border-[1px] border-[#495057] relative bg-[#343A40] max-w-full'
-                    >
+                        className='px-10 py-5 min-h-[300px] max-h-auto lg:max-h-full rounded-[10px] text-white border-[1px] border-[#495057] relative bg-[#343A40] max-w-full lg:w-[50%]'>
                         <HocChatGptTemplateActive/>
                     </div>
                 </main>
-                <footer className='text-white self-end'>
+                <footer className='text-white self-end mb-4'>
                     <ButtonChatsOrDiario/>
                 </footer>
                 <Analytics/>

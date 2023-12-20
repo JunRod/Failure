@@ -1,6 +1,5 @@
 import Logout from "@components/logout";
 import Login from "@components/login";
-import "@styles/profileClient.css"
 import {getSession} from "@auth0/nextjs-auth0";
 
 async function ProfileClient() {

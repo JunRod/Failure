@@ -95,10 +95,10 @@ function GenerateArticles() {
             <div
                 onClick={() => onClick(article)}
                 key={id}
-                className={`${isArticleActive && 'bg-[#6C757D] border-[1px] border-[#6C757D]'} group relative flex flex-col gap-2 p-2 rounded-[10px] bg-[#343A40] border-[1px] border-[#495057] min-h-[90px] text-white`}
+                className={`${isArticleActive && 'bg-[#6C757D] border-[1px] border-[#6C757D]'} cursor-pointer max-w-full group relative flex flex-col gap-0 p-2 rounded-[10px] bg-[#343A40] border-[1px] border-[#495057] min-h-[75px] text-white`}
             >
                 <div className='flex flex-row justify-between items-center relative w-full'>
-                    <h1 className='font-medium relative max-h-[50px] w-[90%] overflow-y-auto break-words'>{titleNote ? titleNote : 'Sin' +
+                    <h1 className=' lg:scrollbar-thumb-[#495057] lg:scrollbar-thumb-rounded-full lg:scrollbar lg:scrollbar-w-[2px] font-medium relative max-h-[50px] w-[95%] overflow-y-auto break-words'>{titleNote ? titleNote : 'Sin' +
                         ' titulo'}</h1>
                     <svg
                         onClick={(e) => {
@@ -106,7 +106,7 @@ function GenerateArticles() {
                             controllerDelete(id, titleNote)
                         }}
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`hidden group-hover:flex icon icon-tabler icon-tabler-trash-filled `}
+                        className={`self-start hidden group-hover:flex icon icon-tabler icon-tabler-trash-filled `}
                         width="22" height="22" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
                         fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -118,7 +118,7 @@ function GenerateArticles() {
                             strokeWidth="0" fill="currentColor"></path>
                     </svg>
                 </div>
-                <p className='flex-1 font-normal overflow-hidden line-clamp-3'>{content ? content : '...'}</p>
+                <p className='font-light line-clamp-2'>{content ? content : '...'}</p>
             </div>
         )
     })

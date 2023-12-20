@@ -38,7 +38,7 @@ function ButtonCreateArticle() {
     return (
         <div
             onClick={onClick}
-            className=' w-full h-[30px] flex items-center justify-center text-white text-center bg-[#343A40] transition-all  relative rounded-[10px] hover:border-[1px] hover:border-[#6C757D] hover:bg-[#6C757D] ease border-[1px] border-[#495057] hover:h-[45px] duration-700'
+            className=' w-full h-[30px] flex items-center justify-center text-white text-center bg-[#343A40] transition-all  relative rounded-[10px] cursor-pointer hover:border-[1px] hover:border-[#6C757D] hover:bg-[#6C757D] ease border-[1px] border-[#495057] hover:h-[45px] duration-100'
         >
             <h1>
                 +

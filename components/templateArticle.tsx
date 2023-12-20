@@ -77,9 +77,9 @@ function TemplateArticle() {
     if (!articleActive) return (<div className={'text-center'}>Elige un articulo</div>)
 
     return (
-        <div className='flex flex-col justify-between h-full'>
+        <div className='flex flex-col'>
             <textarea
-                className='text-lg  h-[20px] font-bold z-10 overflow-y-auto focus:outline-0 resize-none text-white border-0 p-0 bg-[#343A40] w-full'
+                className='lg:scrollbar-thumb-[#495057] lg:scrollbar-thumb-rounded-full lg:scrollbar lg:scrollbar-w-[2px] text-lg  h-auto font-medium z-10 overflow-y-auto focus:outline-0 resize-none text-white border-0 p-0 bg-[#343A40] w-full'
                 ref={refTitleNote}
                 readOnly={pathname === '/generates'}
                 onChange={onChange}
@@ -89,7 +89,7 @@ function TemplateArticle() {
                 wrap="soft"
             />
             <textarea
-                className='my-5 h-[400px] text-base overflow-y-auto z-10  focus:outline-0 resize-none text-white border-0 p-0 bg-[#343A40] w-full'
+                className='lg:scrollbar-thumb-[#495057] lg:scrollbar-thumb-rounded-full lg:scrollbar lg:scrollbar-w-[2px] my-1 mb-4 h-[400px] font-light overflow-y-auto z-10  focus:outline-0 resize-none text-white border-0 p-0 bg-[#343A40] w-full'
                 readOnly={pathname === '/generates'}
                 onChange={onChange}
                 placeholder='Contenido'
