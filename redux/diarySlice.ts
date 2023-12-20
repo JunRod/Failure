@@ -109,11 +109,11 @@ export const diary = createSlice({
 
             if (state.dataUserActive === null) return
 
-            state.dataUserActive.data = state.dataUserActive.data.map(document => {
-                if (document._id === state.idDocument) {
+            state.dataUserActive.data = state?.dataUserActive?.data.map(document => {
+                if (document?._id === state.idDocument) {
                     return {
                         ...document,
-                        articles: document.articles.map(article => {
+                        articles: document?.articles?.map(article => {
                             return article?.id === payload?.id ? payload : article
                         }),
                     }
@@ -131,11 +131,11 @@ export const diary = createSlice({
             const {object, isExistDocument, day, month} = payload
 
             state.dataUserActive.data = isExistDocument
-                ? state.dataUserActive.data.map(document => {
-                    if (document._id === state.idDocument) {
+                ? state.dataUserActive?.data?.map(document => {
+                    if (document?._id === state.idDocument) {
                         return {
                             ...document,
-                            articles: [...document.articles, object]
+                            articles: [...document?.articles, object]
                         };
                     }
                     return document;
@@ -155,15 +155,15 @@ export const diary = createSlice({
 
             if (state.dataUserActive === null) return
 
-            state.dataUserActive.data = state.dataUserActive.data.map(document => {
-                if (document._id === state.idDocument) {
+            state.dataUserActive.data = state?.dataUserActive?.data?.map(document => {
+                if (document?._id === state.idDocument) {
 
-                    return document.articles.length === 1
+                    return document?.articles?.length === 1
                         ? false
                         : {
                             ...document,
-                            articles: document.articles.filter(article => {
-                                return article.id !== payload
+                            articles: document?.articles?.filter(article => {
+                                return article?.id !== payload
                             })
                         }
                 }
@@ -175,30 +175,30 @@ export const diary = createSlice({
         },
         setSaveChatInDataUser: (state, {payload}) => {
 
-            if (state.dataUserActive === null) return;
+            if (state?.dataUserActive === null) return;
 
-            const chatIndex = state.dataUserActive.chats.findIndex(chat => chat.id === payload.id);
+            const chatIndex = state?.dataUserActive?.chats?.findIndex(chat => chat.id === payload.id);
 
             if (chatIndex !== -1) {
                 // El chat ya existe, actualiza el elemento en el array
-                state.dataUserActive.chats = state.dataUserActive.chats.map((chat, index) =>
+                state.dataUserActive.chats = state?.dataUserActive?.chats?.map((chat, index) =>
                     index === chatIndex ? payload : chat
                 );
             } else {
                 // El chat no existe, añádelo al array
-                state.dataUserActive.chats.push(payload);
+                state.dataUserActive.chats?.push(payload);
             }
         },
         setDeleteChat: (state, {payload}) => {
             if (state.dataUserActive === null) return
 
-            state.dataUserActive.chats = state.dataUserActive.chats.filter(chat => chat.id !== payload)
+            state.dataUserActive.chats = state.dataUserActive?.chats.filter(chat => chat?.id !== payload)
         },
         setUpdateLastChat: (state, {payload: completion}) => {
 
-            const lastIndex = state.chatData.chat.length - 1;
+            const lastIndex = state?.chatData?.chat?.length - 1;
 
-            state.chatData.chat = state.chatData.chat.map((chat, index) => {
+            state.chatData.chat = state?.chatData?.chat?.map((chat, index) => {
                 if (index === lastIndex) {
                     return {...chat, completion}
                 }
