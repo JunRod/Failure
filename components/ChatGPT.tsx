@@ -147,7 +147,7 @@ function ChatGpt() {
     }, [textArea]);
 
     return (
-        <div className='relative flex flex-col justify-between min-h-full '>
+        <div className='relative flex flex-col justify-between h-full '>
             <div
                 className='mb-3 w-full flex justify-end bg-gradient-to-b from-[#ADB5BD] font-medium from-30% to-80% to-transparent bg-clip-text text-transparent'>
                 GPT 4 Turbo
@@ -228,7 +228,7 @@ function ChatGpt() {
                     value={textArea}
                     onChange={(e) => setTextArea(e.target.value)}>
                 </textarea>
-                <div className=' flex flex-col h-full w-full justify-center absolute'>
+                <div className=' flex flex-col h-full w-full justify-center absolute cursor-pointer'>
                     {
                         isLoading
                             ? (
@@ -241,7 +241,7 @@ function ChatGpt() {
                                 </span>
                             )
                             : (<button
-                                className={`${!textArea ? 'opacity-20' : 'opacity-100'} z-30 mr-3 self-end bg-[#fff] rounded-[5px] absolute`}
+                                className={`${!textArea ? 'opacity-20' : 'opacity-100'}  z-30 mr-3 self-end bg-[#fff] rounded-[5px] absolute`}
                                 disabled={!textArea}
                                 onClick={() => onClick()}
                             >
