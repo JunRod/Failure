@@ -1,4 +1,4 @@
-# [To Failure](https://tofailure.vercel.app)
+# [To Failure (Click para probar)](https://tofailure.vercel.app)
 
 ![To Failure](https://res.cloudinary.com/dabwdkdys/image/upload/v1699986089/large_ni5yrn.png)
 ¿Escribes tus logros y desafíos solo para olvidarlos después? Con ToFailure, un clic y tu elección de días revelan al instante tus hábitos, ya sean positivos o negativos. ¡Registra tu progreso de manera eficiente!
