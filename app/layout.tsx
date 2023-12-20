@@ -74,7 +74,7 @@ export default function RootLayout({children}: { children: React.ReactNode }) {
                     {children}
                     <div className='h-[1px] w-full bg-[#343A40] lg:hidden'></div>
                     <div
-                        className='px-10 py-5 min-h-[300px] max-h-auto lg:max-h-full rounded-[10px] text-white border-[1px] border-[#495057] relative bg-[#343A40] max-w-full lg:w-[50%]'>
+                        className=' px-10 py-5 min-h-[300px] max-h-auto lg:max-h-full rounded-[10px] text-white border-[1px] border-[#495057] relative bg-[#343A40] max-w-full lg:w-[50%]'>
                         <HocChatGptTemplateActive/>
                     </div>
                 </main>

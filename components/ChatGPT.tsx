@@ -147,7 +147,7 @@ function ChatGpt() {
     }, [textArea]);
 
     return (
-        <div className='relative flex flex-col h-full'>
+        <div className='relative flex flex-col justify-between min-h-full '>
             <div
                 className='mb-3 w-full flex justify-end bg-gradient-to-b from-[#ADB5BD] font-medium from-30% to-80% to-transparent bg-clip-text text-transparent'>
                 GPT 4 Turbo
@@ -208,9 +208,9 @@ function ChatGpt() {
                         }
                     </div>)
                     : (
-                        <div className='max-h-full relative lg:h-full'>
+                        <div className='max-h-full relative flex flex-col'>
                             <div
-                                className=' mt-[50px] mb-[120px] lg:mb-[75px] flex flex-col justify-center items-center'>
+                                className='relative mt-[50px] mb-[50px] flex flex-col justify-center items-center'>
                                 <LogoGPT/>
                                 <h2 className='font-semibold'>¿Cómo puedo ayudarte hoy?</h2>
                             </div>
