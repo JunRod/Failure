@@ -20,7 +20,7 @@ function Page() {
                     <IsDaysOrMonth/>
                 </div>
             </section>
-            <section className='flex flex-col w-full lg:max-w-[45%]'>
+            <section className='flex flex-col w-full lg:max-w-[45%] gap-3'>
                 <ButtonCreateArticle/>
                 <div
                     className='lg:scrollbar-none flex flex-col w-full gap-3 h-[250px] overflow-hidden overflow-y-auto relative lg:h-full'>
