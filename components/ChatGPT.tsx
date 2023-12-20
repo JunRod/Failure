@@ -208,7 +208,7 @@ function ChatGpt() {
                         }
                     </div>)
                     : (
-                        <div className='max-h-full relative flex flex-col'>
+                        <div className=' max-h-full relative flex flex-col justify-between h-full gap-12'>
                             <div
                                 className='relative mt-[50px] mb-[50px] flex flex-col justify-center items-center'>
                                 <LogoGPT/>

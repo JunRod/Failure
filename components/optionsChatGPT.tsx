@@ -17,7 +17,7 @@ function OptionsChatGpt({optionSelected}: { optionSelected: (option: string) => 
 
     return (
         <section
-            className='relative text-sm leading-4 font-light items-stretch mb-6 max-w-full px-9 flex flex-row gap-2 justify-center'>
+            className='relative text-sm leading-4 font-light items-stretch mb-3 max-w-full px-9 flex flex-row gap-2 justify-center'>
             <div className='justify-between flex flex-col w-[50%] gap-2'>
                 {leftOptions.map((optionGroup, groupIndex) => (
                     <article
